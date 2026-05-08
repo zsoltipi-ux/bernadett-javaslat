@@ -325,6 +325,17 @@ section+section{border-top:1px solid var(--line)}
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:10px;margin-bottom:18px;
 }
+.demo-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab-btn{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  padding:7px 12px;border-radius:6px;
+  background:transparent;color:var(--ink-soft);
+  border:1px solid var(--line);
+  letter-spacing:.04em;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.tab-btn:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.tab-btn.active{background:var(--accent-soft);color:var(--accent-deep);border-color:var(--accent-soft)}
 .demo-label{
   font-family:var(--mono);
   font-size:11px;
@@ -793,11 +804,9 @@ footer .small{
 
   <div class="letter">
     <div class="letter-eyebrow">Bernadettnek, személyesen</div>
-    <p>Ön pénteken sokat hallott rólam — köztük arról is, hogy nemrég átestem egy <strong>műtéten</strong>, és azóta egy <em>új fejezet</em> elején vagyok. Ennek az új fejezetnek pontosan az a célja, ami Önnek is fontos: <strong>valódi értéket adni másoknak</strong> — és számomra ez most leginkább azt jelenti, hogy időt és teret szabadítok fel embereknek, akik a saját szakmájukban valami fontosat csinálnak.</p>
+    <p>Ön pénteken sokat hallott rólam — köztük arról is, hogy egy <strong>műtét</strong> után <em>új fejezet</em> elején vagyok. Ennek pontosan az a célja, ami Önnek is fontos: <strong>valódi értéket adni</strong> — leginkább úgy, hogy időt és teret szabadítok fel embereknek, akik a szakmájukban valami fontosat csinálnak.</p>
 
-    <p>Több projektben dolgozom, sokféle szerepben — van a <strong>Smilestone</strong> (fogtechnikai szoftver), de mentorálok is, oktatok, és építek megoldásokat olyan szakembereknek, akiknek a hétköznapok adminisztratív része sok órát visz el feleslegesen. Mindegyikből tanulok, és mindegyikben az a célom, hogy az ügyfél úgy érezze: <em>megérte</em>. Ezt szándékosan <strong>megfizethető áron</strong> csinálom — a tanulás nekem ugyanúgy érték, mint Önnek a kapott idő.</p>
-
-    <p>Ezt a javaslatot is ezzel a szándékkal állítottam össze: visszaolvastam a péntek-i szavait, és ami a leginkább nyomja Önt, abból három konkrét eszköz lett. <strong>Az első ingyenes próbafutás</strong> — semmi kötöttség, semmi nyomás. Ha működik, beszélünk a folytatásról. Ha nem, akkor sem volt baj.</p>
+    <p>Több projektben dolgozom, sokféle szerepben — és mindegyikben az a célom, hogy az ügyfél úgy érezze: <em>megérte</em>. <strong>Megfizethető áron</strong>, mert a tanulás nekem ugyanúgy érték. <strong>Az első eszköz ingyenes próbafutás</strong> — ha működik, beszélünk a folytatásról.</p>
 
     <div class="signoff">— Zsolt</div>
   </div>
@@ -855,29 +864,74 @@ footer .small{
       <h3>Esti összefoglaló + emlékeztető-asszisztens</h3>
       <p class="pitch">Az Ön mondatára épül: <em>„hívjam fel két hét múlva — és elsodor az élet."</em> Megakadályozzuk, hogy elsodorjon.</p>
 
-      <!-- LIVE INTERACTIVE DEMO -->
+      <!-- LIVE INTERACTIVE DEMO with tabs -->
       <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-tab="voice">🎙 Hangüzenet</button>
+          <button class="tab-btn" data-tab="morning">📧 Reggeli e-mail</button>
+          <button class="tab-btn" data-tab="evening">🌙 Esti e-mail</button>
+        </div>
         <div class="demo-head">
           <span class="demo-label">Élő demo · próbálja ki</span>
           <button class="demo-btn" id="demoBtn">Demo indítása →</button>
         </div>
-        <div class="phone-frame" id="phoneFrame">
+
+        <!-- Tab 1: Voice -> bot reply -->
+        <div class="phone-frame demo-pane active" id="paneVoice">
           <div class="phone-time">CSÜTÖRTÖK · 14:32</div>
           <div class="bubble user" data-step="1">
             <span class="b-label">🎙️ Ön — hangüzenet</span>
-            „Kovács István hívott, lakást keres a Bartók úton, hívd vissza május 22-én reggel."
+            „Kovács István hívott, lakást keres a Bartók úton, hívj vissza május 22-én reggel."
           </div>
           <div class="typing" id="typing1"><span></span><span></span><span></span></div>
           <div class="bubble bot" data-step="2">
             <span class="b-label">✓ Asszisztens — 8 mp múlva</span>
-            <strong>Rögzítve.</strong> Új kontakt a ClickCRM-ben: <strong>Kovács István</strong> — keres: lakás, Bartók út. Naptárban: <strong>május 22., 9:00</strong> — visszahívás.
+            <strong>Rögzítettem.</strong> Kovács Istvánt vissza kell hívnod <strong>május 22-én 9:00-kor</strong>. Beírtam a naplódba.
           </div>
-          <div class="timestamp" data-step="3">— ESTE 18:00 —</div>
-          <div class="bubble email" data-step="4">
-            <span class="b-label">📧 Napi összefoglaló</span>
-            <div class="e-from">asszisztens@... → bernadett@...</div>
-            <div class="e-subject">Csütörtök — összefoglaló</div>
-            <div class="e-body">Ma <strong>3 emberrel</strong> egyeztetett. Holnap 1 visszahívás (Nagy Anna, 10:00). Pénteken nincs aktív teendő. <strong>Május 22-én visszahívás Kovács Istvánnak.</strong></div>
+          <div class="timestamp" data-step="3">— ÚJABB HANGÜZENET —</div>
+          <div class="bubble user" data-step="4">
+            <span class="b-label">🎙️ Ön — hangüzenet</span>
+            „Nagy Anna eladná a Sasad-Sashegyi lakását, holnap 10-kor visszahívom."
+          </div>
+          <div class="bubble bot" data-step="5">
+            <span class="b-label">✓ Asszisztens</span>
+            <strong>Megvan.</strong> Holnap 10:00-kor visszahívod Nagy Annát (Sasad-Sashegy, eladó).
+          </div>
+        </div>
+
+        <!-- Tab 2: Morning email -->
+        <div class="phone-frame demo-pane" id="paneMorning" style="display:none">
+          <div class="phone-time">PÉNTEK · 08:00</div>
+          <div class="bubble email" data-step="1" style="border-color:#C97B8E">
+            <span class="b-label" style="color:#9C5469">🌷 Reggeli</span>
+            <div class="e-from">asszisztens · péntek, 08:00</div>
+            <div class="e-subject">Reggeli — péntek, 2026. május 9.</div>
+            <div class="e-body">
+              <strong>Ma 2 visszahívásod van. Sorrendben:</strong><br><br>
+              <span style="display:inline-block;width:8px;height:8px;background:#C97B8E;border-radius:50%;vertical-align:middle;margin-right:6px"></span><strong>10:00</strong> — Nagy Anna · Sasad-Sashegy lakás eladó<br><br>
+              <span style="display:inline-block;width:8px;height:8px;background:#C97B8E;border-radius:50%;vertical-align:middle;margin-right:6px"></span><strong>14:30</strong> — Tóth család · 2 hete érdeklődtek<br>
+              <em style="color:#8E827E">📞 +36 30 ...</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Evening email -->
+        <div class="phone-frame demo-pane" id="paneEvening" style="display:none">
+          <div class="phone-time">CSÜTÖRTÖK · 18:00</div>
+          <div class="bubble email" data-step="1">
+            <span class="b-label">🌙 Esti</span>
+            <div class="e-from">asszisztens · csütörtök, 18:00</div>
+            <div class="e-subject">Esti összefoglaló — csütörtök</div>
+            <div class="e-body">
+              <strong>Ma rögzítettél:</strong><br>
+              › Kovács István — lakást keres, Bartók út<br>
+              › Nagy Anna — Sasad-Sashegy eladó<br>
+              › Megbízási szerződés letöltve (Tóth)<br><br>
+              <strong>Holnap (péntek):</strong><br>
+              › <strong>10:00</strong> Nagy Anna visszahívás<br>
+              › <strong>14:30</strong> Tóth család visszahívás<br><br>
+              <em style="color:#8E827E">Május 22-én még: Kovács István</em>
+            </div>
           </div>
         </div>
       </div>
@@ -933,20 +987,50 @@ footer .small{
       <h3>Ügyfél-űrlap email-ben</h3>
       <p class="pitch">Az Ön szavai: <em>„Egy adatlapot ő kitölthessen, és akkor visszaküldhesse nekem."</em> Pontosan ezt csináljuk meg.</p>
 
-      <!-- FORM PREVIEW MOCKUP -->
-      <div class="form-preview">
-        <div class="fp-head">
-          <div class="fp-icon">U</div>
-          <div>
-            <div class="fp-title">Ügyfél-átvilágítási űrlap</div>
-            <div class="fp-sub">5 perc · az ügyfél telefonján</div>
+      <!-- FORM PREVIEW — interaktív 2-state toggle -->
+      <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-fp-tab="customer">📱 Az ügyfél telefonján</button>
+          <button class="tab-btn" data-fp-tab="received">📧 Te ezt kapod</button>
+        </div>
+
+        <!-- Customer view -->
+        <div class="form-preview demo-pane active" id="fpCustomer">
+          <div class="fp-head">
+            <div class="fp-icon">U</div>
+            <div>
+              <div class="fp-title">Ügyfél-átvilágítási űrlap</div>
+              <div class="fp-sub">5 perc · az ügyfél telefonján</div>
+            </div>
+          </div>
+          <div class="fp-row"><label>Név</label><span class="val placeholder">Kovács István</span></div>
+          <div class="fp-row"><label>Lakcím</label><span class="val placeholder">Budapest, Bartók út 32.</span></div>
+          <div class="fp-row"><label>Igazolvány-szám</label><span class="val placeholder">123456 AB</span></div>
+          <div class="fp-row"><label>Mit keres</label><span class="val placeholder">Lakás, 50-70 m², XI. ker.</span></div>
+          <div class="fp-row"><label>Árhatár</label><span class="val placeholder">60-80 millió</span></div>
+        </div>
+
+        <!-- What Bernadett receives -->
+        <div class="form-preview demo-pane" id="fpReceived" style="display:none">
+          <div class="fp-head">
+            <div class="fp-icon" style="background:var(--accent-soft);color:var(--accent-deep)">B</div>
+            <div>
+              <div class="fp-title">Új ügyfél · email értesítés</div>
+              <div class="fp-sub">Postafiókodban azonnal · CRM-ben automatikusan</div>
+            </div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:8px">
+            <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.1em;margin-bottom:8px">FELADÓ: ügyfél · TÁRGY: Új érdeklődő — Kovács István</div>
+            <p style="font-size:14px;color:var(--ink);line-height:1.55;margin:0 0 8px"><strong>Kovács István</strong> kitöltötte az átvilágítási űrlapot. Az adatok a CRM-edben már bent vannak.</p>
+            <ul style="margin:0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-soft);line-height:1.7">
+              <li>📍 Budapest, Bartók út 32.</li>
+              <li>🆔 123456 AB</li>
+              <li>🔍 Lakás, 50-70 m², XI. kerület</li>
+              <li>💰 60-80 millió Ft</li>
+            </ul>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-faint);font-family:var(--mono)">PDF mellékletként is, a CRM-ben az új lapra mutató link.</div>
           </div>
         </div>
-        <div class="fp-row"><label>Név</label><span class="val placeholder">Kovács István</span></div>
-        <div class="fp-row"><label>Lakcím</label><span class="val placeholder">Budapest, Bartók út 32.</span></div>
-        <div class="fp-row"><label>Igazolvány-szám</label><span class="val placeholder">123456 AB</span></div>
-        <div class="fp-row"><label>Mit keres</label><span class="val placeholder">Lakás, 50-70 m², XI. ker.</span></div>
-        <div class="fp-row"><label>Árhatár</label><span class="val placeholder">60-80 millió</span></div>
       </div>
 
       <details class="acc">
@@ -985,22 +1069,31 @@ footer .small{
       <h3>Értékbecslés-vázlat előtöltése</h3>
       <p class="pitch">Az Ön szavai: <em>„Van egy nagyjából sablonom, de minden értékbecslés más. Vezérfonal van."</em> A vezérfonal marad az Öné — csak a kézi adatbevitel megy el.</p>
 
-      <!-- SAMPLE WORD DOC PREVIEW -->
-      <div class="sample-preview">
-        <div class="sp-bar">ELŐNÉZET — 60-70%-ban előtöltött vázlat</div>
-        <div class="sp-body">
-          <div class="h">Értékbecslési Jelentés</div>
-          <div class="meta">Görbe utca 4/B · HRSZ 2347/3 · 2026.05.10.</div>
-          <table>
-            <tr><td>HRSZ</td><td><span class="filled">2347/3 (kivonat)</span></td></tr>
-            <tr><td>Méret (m²)</td><td><span class="filled">165 m² hasznos + 80 pince</span></td></tr>
-            <tr><td>Terhek</td><td><span class="filled">ELMŰ vezetékjog 23m²</span></td></tr>
-            <tr><td>Tulajdonosok</td><td><span class="filled">5 fő, osztatlan közös</span></td></tr>
-            <tr><td>Comparable-ek (Sasad, 2026)</td><td><span class="filled">3 hirdetés ingatlan.com-ról</span></td></tr>
-            <tr><td>Becsült érték</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
-            <tr><td>Állapot-faktor</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
-            <tr><td>Érvelés</td><td><span class="empty">Bernadett írja meg</span></td></tr>
-          </table>
+      <!-- SAMPLE WORD DOC PREVIEW — interaktív filter -->
+      <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-sp-filter="all">Az egész vázlat</button>
+          <button class="tab-btn" data-sp-filter="auto">Mit csinál a rendszer</button>
+          <button class="tab-btn" data-sp-filter="manual">Mit írsz Te</button>
+        </div>
+        <div class="sample-preview" id="spDoc">
+          <div class="sp-bar">ELŐNÉZET — 60-70%-ban előtöltött vázlat</div>
+          <div class="sp-body">
+            <div class="h">Értékbecslési Jelentés</div>
+            <div class="meta">Görbe utca 4/B · HRSZ 2347/3 · 2026.05.10.</div>
+            <table>
+              <tr data-kind="auto"><td>HRSZ</td><td><span class="filled">2347/3 (kivonat)</span></td></tr>
+              <tr data-kind="auto"><td>Méret (m²)</td><td><span class="filled">165 m² hasznos + 80 pince</span></td></tr>
+              <tr data-kind="auto"><td>Terhek</td><td><span class="filled">ELMŰ vezetékjog 23m²</span></td></tr>
+              <tr data-kind="auto"><td>Tulajdonosok</td><td><span class="filled">5 fő, osztatlan közös</span></td></tr>
+              <tr data-kind="auto"><td>Comparable-ek (Sasad, 2026)</td><td><span class="filled">3 hirdetés ingatlan.com-ról</span></td></tr>
+              <tr data-kind="auto"><td>Piaci kontextus</td><td><span class="filled">XI. ker. 1.289 E Ft/m² átlag</span></td></tr>
+              <tr data-kind="manual"><td>Becsült érték</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
+              <tr data-kind="manual"><td>Állapot-faktor</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
+              <tr data-kind="manual"><td>Stratégiai érvelés</td><td><span class="empty">Bernadett írja meg</span></td></tr>
+            </table>
+            <p style="font-size:12.5px;color:var(--ink-faint);margin-top:14px;font-family:var(--mono);letter-spacing:.04em">A <span style="background:var(--green-soft);color:#3A5836;padding:1px 5px;border-radius:3px">zöld</span> sorok automatikusan jönnek. A <span style="background:var(--accent-soft);color:var(--accent-deep);padding:1px 5px;border-radius:3px">rózsaszín</span> a Te szakmai részed.</p>
+          </div>
         </div>
       </div>
 
@@ -1123,53 +1216,98 @@ footer .small{
 
 <script>
 (function(){
+  /* ============== TOOL 1 — phone demo with tabs ============== */
   var btn=document.getElementById('demoBtn');
-  var bubbles=document.querySelectorAll('#phoneFrame [data-step]');
   var typing=document.getElementById('typing1');
-  var timeouts=[];
+  var t1timeouts=[];
+  var currentTab='voice';
 
-  function reset(){
-    timeouts.forEach(clearTimeout);
-    timeouts=[];
-    bubbles.forEach(function(b){b.classList.remove('visible')});
-    typing.classList.remove('visible');
-    btn.disabled=false;
-    btn.textContent='Demo indítása →';
+  function panes(){return document.querySelectorAll('.demo-tabs ~ .demo-pane, .demo-pane');}
+
+  function showPane(name){
+    document.querySelectorAll('[data-tab]').forEach(function(b){
+      b.classList.toggle('active', b.dataset.tab===name);
+    });
+    var voice=document.getElementById('paneVoice');
+    var morning=document.getElementById('paneMorning');
+    var evening=document.getElementById('paneEvening');
+    if(voice) voice.style.display = name==='voice' ? 'flex' : 'none';
+    if(morning) morning.style.display = name==='morning' ? 'flex' : 'none';
+    if(evening) evening.style.display = name==='evening' ? 'flex' : 'none';
+    currentTab=name;
+    resetT1();
   }
 
-  function play(){
-    reset();
+  function resetT1(){
+    t1timeouts.forEach(clearTimeout);
+    t1timeouts=[];
+    document.querySelectorAll('.phone-frame [data-step]').forEach(function(b){b.classList.remove('visible')});
+    if(typing) typing.classList.remove('visible');
+    if(btn){btn.disabled=false;btn.textContent='Demo indítása →';}
+  }
+
+  function playT1(){
+    resetT1();
+    if(!btn) return;
     btn.disabled=true;
     btn.textContent='Lejátszás...';
-    // Step 1: user voice message
-    timeouts.push(setTimeout(function(){
-      bubbles[0].classList.add('visible');
-    },300));
-    // Step 1.5: typing indicator
-    timeouts.push(setTimeout(function(){
-      typing.classList.add('visible');
-    },1400));
-    // Step 2: bot reply
-    timeouts.push(setTimeout(function(){
-      typing.classList.remove('visible');
-      bubbles[1].classList.add('visible');
-    },3200));
-    // Step 3: timestamp "evening"
-    timeouts.push(setTimeout(function(){
-      bubbles[2].classList.add('visible');
-    },5000));
-    // Step 4: email
-    timeouts.push(setTimeout(function(){
-      bubbles[3].classList.add('visible');
-    },5800));
-    // Re-enable
-    timeouts.push(setTimeout(function(){
-      btn.disabled=false;
-      btn.textContent='Újrajátszás ↻';
-    },7000));
+
+    var pane;
+    if(currentTab==='voice') pane=document.getElementById('paneVoice');
+    if(currentTab==='morning') pane=document.getElementById('paneMorning');
+    if(currentTab==='evening') pane=document.getElementById('paneEvening');
+    if(!pane) return;
+
+    var bubbles=pane.querySelectorAll('[data-step]');
+
+    if(currentTab==='voice'){
+      // 5-step animation
+      t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
+      t1timeouts.push(setTimeout(function(){if(typing)typing.classList.add('visible')},1400));
+      t1timeouts.push(setTimeout(function(){
+        if(typing)typing.classList.remove('visible');
+        bubbles[1].classList.add('visible');
+      },3200));
+      t1timeouts.push(setTimeout(function(){bubbles[2].classList.add('visible')},5000));
+      t1timeouts.push(setTimeout(function(){bubbles[3].classList.add('visible')},5800));
+      t1timeouts.push(setTimeout(function(){bubbles[4].classList.add('visible')},7800));
+      t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},9000));
+    } else {
+      // Single email reveal
+      t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
+      t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},1500));
+    }
   }
 
-  if(btn) btn.addEventListener('click',play);
+  document.querySelectorAll('[data-tab]').forEach(function(b){
+    b.addEventListener('click', function(){showPane(b.dataset.tab)});
+  });
+  if(btn) btn.addEventListener('click', playT1);
+
+  /* ============== TOOL 2 — form preview tabs ============== */
+  document.querySelectorAll('[data-fp-tab]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var tab=b.dataset.fpTab;
+      document.querySelectorAll('[data-fp-tab]').forEach(function(x){x.classList.toggle('active',x===b)});
+      var c=document.getElementById('fpCustomer');
+      var r=document.getElementById('fpReceived');
+      if(c) c.style.display = tab==='customer' ? 'block' : 'none';
+      if(r) r.style.display = tab==='received' ? 'block' : 'none';
+    });
+  });
+
+  /* ============== TOOL 3 — sample doc filter ============== */
+  document.querySelectorAll('[data-sp-filter]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var f=b.dataset.spFilter;
+      document.querySelectorAll('[data-sp-filter]').forEach(function(x){x.classList.toggle('active',x===b)});
+      document.querySelectorAll('#spDoc tr[data-kind]').forEach(function(tr){
+        if(f==='all'){tr.style.opacity='1';tr.style.filter='none'}
+        else if(tr.dataset.kind===f){tr.style.opacity='1';tr.style.filter='none'}
+        else{tr.style.opacity='0.25';tr.style.filter='grayscale(.5)'}
+      });
+    });
+  });
 })();
 </script>
 
