@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javaslat — Ropoli Bernadettnek</title>
+<meta name="description" content="Három eszköz, ami időt ad vissza — személyes javaslat Ropoli Bernadettnek a péntek 14:30-i beszélgetésünk alapján.">
+<meta name="theme-color" content="#FAF6F2">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FAF6F2;
+  --bg-soft:#F5EDE3;
+  --bg-card:#FFFFFF;
+  --ink:#1F1A1A;
+  --ink-soft:#5C504D;
+  --ink-faint:#8E827E;
+  --line:rgba(31,26,26,.10);
+  --line-strong:rgba(31,26,26,.18);
+  --accent:#C97B8E;
+  --accent-deep:#9C5469;
+  --accent-soft:#F2DCE0;
+  --gold:#C9A875;
+  --gold-soft:#F0E4CE;
+  --green:#7A9276;
+  --green-soft:#E0E8DD;
+  --radius:12px;
+  --radius-lg:18px;
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+  position:relative;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(201,123,142,.07) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 30%, rgba(201,168,117,.06) 0%, transparent 45%);
+  pointer-events:none;z-index:0;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:transparent;color:inherit}
+
+.container{max-width:760px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* TYPO HELPERS */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent-deep);
+  font-weight:500;
+}
+.mono{font-family:var(--mono)}
+.serif{font-family:var(--serif)}
+
+/* HERO */
+.hero{
+  padding:88px 24px 56px;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+.hero-inner{max-width:720px;margin:0 auto}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:32px}
+.hero .eyebrow::before,.hero .eyebrow::after{content:"";width:24px;height:1px;background:var(--accent-deep);opacity:.5}
+.hero h1{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(38px,7vw,68px);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:24px;
+  color:var(--ink);
+  text-wrap:balance;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--accent-deep);
+  font-weight:400;
+}
+.hero .lede{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(18px,2.2vw,22px);
+  color:var(--ink-soft);
+  max-width:580px;
+  margin:0 auto 36px;
+  line-height:1.55;
+}
+.hero-meta{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:8px 24px;
+  justify-content:center;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  letter-spacing:.04em;
+}
+.hero-meta strong{color:var(--ink);font-weight:500}
+
+/* SECTION */
+section{padding:64px 0;position:relative;z-index:1}
+section+section{border-top:1px solid var(--line)}
+
+.section-num{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--accent-deep);
+  letter-spacing:.18em;
+  margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-num::after{content:"";flex:1;height:1px;background:var(--line);max-width:80px}
+.section-title{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(28px,4.5vw,42px);
+  line-height:1.15;
+  letter-spacing:-.015em;
+  margin-bottom:14px;
+  color:var(--ink);
+  text-wrap:balance;
+}
+.section-title em{font-style:italic;color:var(--accent-deep)}
+.section-sub{
+  color:var(--ink-soft);
+  font-size:16px;
+  margin-bottom:30px;
+  max-width:60ch;
+  line-height:1.65;
+}
+
+/* PERSONAL LETTER */
+.letter{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-left:3px solid var(--gold);
+  border-radius:var(--radius);
+  padding:32px 32px 28px;
+  margin:24px 0 16px;
+  position:relative;
+}
+.letter::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:80px;
+  background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%);
+  opacity:.35;
+  border-radius:var(--radius) var(--radius) 0 0;
+  pointer-events:none;
+}
+.letter-eyebrow{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+  margin-bottom:18px;
+  position:relative;
+}
+.letter p{
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin-bottom:16px;
+  position:relative;
+  letter-spacing:-.005em;
+}
+.letter p:last-child{margin-bottom:0}
+.letter strong{color:var(--ink);font-weight:500}
+.letter em{font-style:italic;color:var(--accent-deep)}
+.letter .signoff{
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-style:italic;
+  font-size:17px;
+}
+
+/* HEARD CARDS */
+.heard-grid{display:grid;gap:14px;margin:24px 0}
+.heard{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 26px;
+  transition:border-color .25s,transform .25s;
+}
+.heard:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+.heard h3{
+  font-family:var(--serif);
+  font-size:20px;
+  font-weight:400;
+  letter-spacing:-.005em;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+  color:var(--ink);
+}
+.heard .num{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--accent-deep);
+  background:var(--accent-soft);
+  width:26px;height:26px;
+  border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:500;
+  flex-shrink:0;
+}
+.heard .quote{
+  font-family:var(--serif);
+  font-style:italic;
+  color:var(--ink-soft);
+  font-size:16px;
+  line-height:1.55;
+  padding:12px 16px;
+  background:var(--bg);
+  border-left:2px solid var(--accent-soft);
+  border-radius:0 8px 8px 0;
+  margin-bottom:12px;
+}
+.heard .meaning{
+  font-size:14.5px;
+  color:var(--ink-soft);
+  line-height:1.6;
+}
+.heard .meaning strong{color:var(--ink);font-weight:600}
+
+/* TOOLS */
+.tools{display:grid;gap:24px;margin:32px 0}
+.tool{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  position:relative;
+  overflow:hidden;
+}
+.tool::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:3px;
+}
+.tool.now::before{background:linear-gradient(90deg,var(--accent),var(--accent-deep))}
+.tool.soon::before{background:linear-gradient(90deg,var(--gold),#A88550)}
+.tool.later::before{background:linear-gradient(90deg,var(--green),#5C7A58)}
+
+.tool-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+.tool-num{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+  font-size:54px;
+  line-height:1;
+  color:var(--accent);
+  flex-shrink:0;
+}
+.tool.soon .tool-num{color:var(--gold)}
+.tool.later .tool-num{color:var(--green)}
+.tool-tag{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:6px 12px;
+  border-radius:6px;
+  white-space:nowrap;
+}
+.tool.now .tool-tag{background:var(--accent-soft);color:var(--accent-deep)}
+.tool.soon .tool-tag{background:var(--gold-soft);color:#7A5A2A}
+.tool.later .tool-tag{background:var(--green-soft);color:#3A5836}
+
+.tool h3{
+  font-family:var(--serif);
+  font-size:28px;
+  font-weight:400;
+  line-height:1.15;
+  letter-spacing:-.01em;
+  margin-bottom:10px;
+  color:var(--ink);
+}
+.tool .pitch{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:17px;
+  color:var(--ink-soft);
+  margin-bottom:24px;
+  line-height:1.55;
+}
+
+/* DEMO — INTERACTIVE PHONE MOCKUP */
+.demo{
+  background:linear-gradient(180deg,var(--bg-soft) 0%,var(--bg) 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  margin:18px 0 20px;
+}
+.demo-head{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;margin-bottom:18px;
+}
+.demo-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab-btn{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  padding:7px 12px;border-radius:6px;
+  background:transparent;color:var(--ink-soft);
+  border:1px solid var(--line);
+  letter-spacing:.04em;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.tab-btn:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.tab-btn.active{background:var(--accent-soft);color:var(--accent-deep);border-color:var(--accent-soft)}
+.demo-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--accent-deep);
+  display:flex;align-items:center;gap:8px;
+}
+.demo-label::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.demo-btn{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:500;
+  padding:8px 14px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:6px;
+  transition:background .2s,transform .15s;
+  letter-spacing:.04em;
+}
+.demo-btn:hover{background:var(--accent-deep);transform:translateY(-1px)}
+.demo-btn:disabled{background:var(--ink-faint);cursor:not-allowed;transform:none}
+
+.phone-frame{
+  background:#fff;
+  border-radius:14px;
+  padding:18px 16px;
+  min-height:260px;
+  display:flex;flex-direction:column;gap:12px;
+  border:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(0,0,0,.02);
+}
+.phone-time{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink-faint);
+  letter-spacing:.1em;
+  text-align:center;
+  padding:4px 0 8px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:4px;
+}
+.bubble{
+  max-width:85%;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.45;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .35s,transform .35s;
+  position:relative;
+}
+.bubble.visible{opacity:1;transform:translateY(0)}
+.bubble.user{
+  background:var(--accent-soft);
+  color:var(--accent-deep);
+  align-self:flex-end;
+  border-bottom-right-radius:4px;
+}
+.bubble.bot{
+  background:var(--bg-soft);
+  color:var(--ink);
+  align-self:flex-start;
+  border-bottom-left-radius:4px;
+}
+.bubble.email{
+  background:#fff;
+  border:1px solid var(--gold);
+  color:var(--ink);
+  align-self:stretch;
+  max-width:100%;
+  border-radius:8px;
+  padding:14px 16px;
+  font-size:13.5px;
+}
+.bubble .b-label{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.6;
+  margin-bottom:4px;
+  display:block;
+}
+.bubble.email .b-label{color:#7A5A2A;font-weight:500}
+.bubble.email .e-from{font-size:12px;color:var(--ink-faint);margin-bottom:6px;font-family:var(--mono)}
+.bubble.email .e-subject{font-weight:600;margin-bottom:6px;font-size:14px}
+.bubble.email .e-body{font-size:13px;color:var(--ink-soft);line-height:1.5}
+
+.typing{
+  align-self:flex-start;
+  background:var(--bg-soft);
+  padding:10px 14px;
+  border-radius:14px;
+  border-bottom-left-radius:4px;
+  display:none;
+  gap:4px;
+}
+.typing.visible{display:flex}
+.typing span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--ink-faint);
+  animation:typing 1.4s ease-in-out infinite;
+}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.timestamp{
+  font-family:var(--mono);
+  font-size:9.5px;
+  color:var(--ink-faint);
+  text-align:center;
+  letter-spacing:.1em;
+  padding:8px 0 4px;
+  opacity:0;
+  transition:opacity .4s;
+}
+.timestamp.visible{opacity:1}
+
+/* FORM PREVIEW (Tool 2) */
+.form-preview{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  margin:18px 0;
+  position:relative;
+}
+.form-preview::before{
+  content:"ELŐNÉZET";
+  position:absolute;top:12px;right:14px;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.2em;
+  color:var(--gold);
+  font-weight:500;
+}
+.fp-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.fp-icon{
+  width:36px;height:36px;
+  background:var(--gold-soft);
+  color:#7A5A2A;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-style:italic;font-size:18px;
+}
+.fp-title{font-weight:600;font-size:14.5px}
+.fp-sub{font-size:12px;color:var(--ink-faint);margin-top:2px;font-family:var(--mono)}
+.fp-row{
+  display:flex;flex-direction:column;gap:6px;margin-bottom:12px;
+  padding:12px 14px;
+  background:var(--bg);
+  border-radius:8px;
+  border:1px solid var(--line);
+}
+.fp-row label{font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.fp-row .val{font-size:14px;color:var(--ink)}
+.fp-row .placeholder{color:var(--ink-faint);font-style:italic}
+
+/* SAMPLE PREVIEW (Tool 3) */
+.sample-preview{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:0;
+  margin:18px 0;
+  overflow:hidden;
+}
+.sp-bar{
+  background:var(--bg-soft);
+  padding:10px 16px;
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  letter-spacing:.1em;
+  display:flex;align-items:center;gap:8px;
+}
+.sp-bar::before{content:"●";color:var(--green);font-size:8px}
+.sp-body{padding:18px 22px;font-size:14px;line-height:1.65}
+.sp-body .h{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:6px}
+.sp-body .meta{font-size:12px;color:var(--ink-faint);font-family:var(--mono);margin-bottom:14px}
+.sp-body table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+.sp-body td{padding:5px 0;border-bottom:1px dashed var(--line)}
+.sp-body td:first-child{color:var(--ink-faint);width:40%;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.sp-body .filled{background:var(--green-soft);padding:1px 6px;border-radius:3px;color:#3A5836}
+.sp-body .empty{background:var(--accent-soft);padding:1px 6px;border-radius:3px;color:var(--accent-deep);font-style:italic}
+
+/* ACCORDION (details) */
+details.acc{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin:10px 0;
+  overflow:hidden;
+  transition:background .2s;
+}
+details.acc[open]{background:var(--bg-card)}
+details.acc summary{
+  list-style:none;
+  padding:14px 18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:13.5px;
+  font-weight:500;
+  color:var(--ink);
+  user-select:none;
+  transition:color .2s;
+}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{
+  content:"+";
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:300;
+  color:var(--accent);
+  transition:transform .2s;
+  line-height:1;
+}
+details.acc[open] summary::after{transform:rotate(45deg)}
+details.acc summary:hover{color:var(--accent-deep)}
+.acc-body{
+  padding:0 18px 18px;
+  font-size:14px;
+  line-height:1.65;
+  color:var(--ink-soft);
+}
+.acc-body p{margin-bottom:10px}
+.acc-body p:last-child{margin-bottom:0}
+.acc-body ul{padding-left:0;list-style:none;margin:6px 0}
+.acc-body li{padding:4px 0;display:flex;gap:10px;font-size:13.5px}
+.acc-body li::before{content:"›";color:var(--accent);flex-shrink:0;font-weight:600}
+.acc-body strong{color:var(--ink);font-weight:600}
+.acc-body .lbl{
+  font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);
+}
+
+/* TOOL META */
+.tool-meta{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:8px;padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.tool-meta-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;
+  padding:5px 12px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--ink-soft);
+  font-family:var(--mono);
+  letter-spacing:.02em;
+}
+.tool-meta-pill strong{color:var(--ink);font-weight:500}
+
+/* OFFER TABLE */
+.offer-table{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin:24px 0;
+}
+.offer-table table{width:100%;border-collapse:collapse;font-size:14px}
+.offer-table th{
+  background:var(--bg-soft);
+  text-align:left;
+  padding:12px 18px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:500;
+}
+.offer-table td{padding:14px 18px;border-top:1px solid var(--line);vertical-align:top}
+.offer-table td:first-child{font-weight:500;color:var(--ink)}
+.offer-table td .sub{display:block;font-weight:400;color:var(--ink-faint);font-size:12.5px;margin-top:3px;font-family:var(--mono);letter-spacing:.02em}
+.offer-table .free{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:11px;
+  background:var(--accent-soft);
+  color:var(--accent-deep);
+  padding:3px 9px;
+  border-radius:4px;
+  letter-spacing:.05em;
+  font-weight:500;
+}
+
+/* TIMELINE */
+.timeline{margin:28px 0 8px}
+.tl-item{display:flex;gap:18px;padding-bottom:26px;position:relative}
+.tl-item:not(:last-child)::after{content:"";position:absolute;left:21px;top:48px;bottom:0;width:1px;background:var(--line)}
+.tl-dot{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-style:italic;font-size:18px;
+  color:#fff;flex-shrink:0;z-index:1;
+}
+.tl-dot.rose{background:var(--accent)}
+.tl-dot.gold{background:var(--gold)}
+.tl-dot.green{background:var(--green)}
+.tl-content h4{
+  font-family:var(--serif);
+  font-size:20px;font-weight:400;
+  margin-bottom:4px;letter-spacing:-.005em;
+}
+.tl-content p{font-size:14.5px;color:var(--ink-soft);line-height:1.6}
+.tl-content .effort{
+  display:inline-block;
+  margin-top:8px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  letter-spacing:.06em;
+}
+
+/* CTA */
+.cta-section{
+  background:linear-gradient(135deg,#1F1A1A 0%,#2D2424 100%);
+  color:#fff;
+  padding:56px 32px;
+  text-align:center;
+  border-radius:var(--radius-lg);
+  margin:40px 0 24px;
+  position:relative;
+  overflow:hidden;
+}
+.cta-section::before{
+  content:"";
+  position:absolute;
+  top:-30%;right:-10%;width:60%;height:160%;
+  background:radial-gradient(ellipse,var(--accent) 0%,transparent 60%);
+  opacity:.18;pointer-events:none;
+}
+.cta-section::after{
+  content:"";
+  position:absolute;
+  bottom:-30%;left:-10%;width:50%;height:140%;
+  background:radial-gradient(ellipse,var(--gold) 0%,transparent 60%);
+  opacity:.12;pointer-events:none;
+}
+.cta-section h2{
+  font-family:var(--serif);
+  font-size:clamp(28px,4vw,38px);
+  font-weight:400;
+  line-height:1.18;
+  margin-bottom:14px;
+  position:relative;
+  letter-spacing:-.01em;
+}
+.cta-section h2 em{font-style:italic;color:var(--accent-soft)}
+.cta-section p{
+  color:rgba(255,255,255,.72);
+  font-size:16px;
+  font-family:var(--serif);
+  font-style:italic;
+  margin-bottom:32px;
+  max-width:480px;
+  margin-left:auto;margin-right:auto;
+  line-height:1.55;
+  position:relative;
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:15px;font-weight:500;
+  padding:15px 28px;
+  border-radius:10px;
+  text-decoration:none;
+  transition:all .2s;
+  line-height:1;
+  font-family:var(--sans);
+}
+.cta-btn.primary{background:var(--accent);color:#fff}
+.cta-btn.primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
+.cta-btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25)}
+.cta-btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+.cta-btn .ico{font-size:13px;opacity:.85}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:36px 24px 56px;
+  font-size:13px;
+  line-height:1.6;
+  position:relative;z-index:1;
+  color:var(--ink-faint);
+}
+footer .sig{
+  font-family:var(--serif);
+  font-style:italic;
+  color:var(--ink-soft);
+  font-size:18px;
+  margin-top:10px;
+}
+footer .small{
+  margin-top:18px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.08em;
+  color:var(--ink-faint);
+  max-width:540px;
+  margin-left:auto;margin-right:auto;
+  line-height:1.7;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .hero{padding:60px 22px 36px}
+  section{padding:48px 0}
+  .container{padding:0 20px}
+  .tool{padding:24px 22px}
+  .tool h3{font-size:24px}
+  .tool-num{font-size:44px}
+  .heard{padding:20px 22px}
+  .letter{padding:26px 24px 22px}
+  .letter p{font-size:16.5px}
+  .cta-section{padding:42px 24px;margin:32px 0 20px}
+  .offer-table th,.offer-table td{padding:10px 14px}
+  .offer-table table{font-size:13px}
+  .demo{padding:18px}
+  .phone-frame{padding:14px 12px}
+  .bubble{font-size:13.5px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0s!important;transition-duration:0s!important}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Személyes javaslat</div>
+    <h1>Senki ne maradjon ki — <em>aki Önnel szeretne dolgozni.</em></h1>
+    <p class="lede">A péntek 14:30-i beszélgetésünk után, abból amit Ön mondott — három olyan eszköz, ami időt ad vissza a hétköznapokba.</p>
+    <div class="hero-meta">
+      <span>Készült <strong>Bernadettnek</strong></span>
+      <span>·</span>
+      <span><strong>2026.05.08.</strong></span>
+      <span>·</span>
+      <span>Olvasási idő ~<strong>7 perc</strong></span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- LETTER — személyes intro -->
+<section>
+  <div class="section-num">01 — Egy szó előre</div>
+  <h2 class="section-title">Mielőtt belevágunk —<br><em>egy mondat magamról.</em></h2>
+
+  <div class="letter">
+    <div class="letter-eyebrow">Bernadettnek, személyesen</div>
+    <p>Ön pénteken sokat hallott rólam — köztük arról is, hogy egy <strong>műtét</strong> után <em>új fejezet</em> elején vagyok. Ennek pontosan az a célja, ami Önnek is fontos: <strong>valódi értéket adni</strong> — leginkább úgy, hogy időt és teret szabadítok fel embereknek, akik a szakmájukban valami fontosat csinálnak.</p>
+
+    <p>Több projektben dolgozom, sokféle szerepben — és mindegyikben az a célom, hogy az ügyfél úgy érezze: <em>megérte</em>. <strong>Megfizethető áron</strong>, mert a tanulás nekem ugyanúgy érték. <strong>Az első eszköz ingyenes próbafutás</strong> — ha működik, beszélünk a folytatásról.</p>
+
+    <div class="signoff">— Zsolt</div>
+  </div>
+</section>
+
+<!-- AMIT HALLOTTAM -->
+<section>
+  <div class="section-num">02 — Amit hallottam Öntől</div>
+  <h2 class="section-title">Négy téma, ami <em>többször előjött.</em></h2>
+  <p class="section-sub">A felvételt visszaolvastam. Ez a négy dolog jött elő a leghangsúlyosabban — nem azért, mert én ezt akartam hallani, hanem mert Ön ezt mondta.</p>
+
+  <div class="heard-grid">
+
+    <div class="heard">
+      <h3><span class="num">1</span>Hirtelen jött információ</h3>
+      <div class="quote">„Amikor fölhívnak telefonon… és tudom, hogy fontos, és azt bedobni valahová, hogy ez nekem ne legyen szem elöl."</div>
+      <div class="meaning">Hív valaki, mond egy email-címet, lakást keres — és estére már <strong>biztosan látnia kell</strong>, különben elsodorja a nap. Ma ez papíron, Nebóban, fejben oszlik el.</div>
+    </div>
+
+    <div class="heard">
+      <h3><span class="num">2</span>„Senki ne maradjon ki"</h3>
+      <div class="quote">„Egy tulajdonos azt mondja, hívjam már fel két hét múlva… és elsodor az élet. Elfeledődik."</div>
+      <div class="meaning">Ezt mondta a beszélgetés egyik kulcs-mondataként: <strong>ha egy dolgot meg lehetne oldani Önnek, ez lenne az</strong>. Hogy senki ne csússzon át, aki Önnel akar dolgozni.</div>
+    </div>
+
+    <div class="heard">
+      <h3><span class="num">3</span>Papíron meg gépen — több helyen</h3>
+      <div class="quote">„Nebóba berakom, de abban nem bízok, mert nehezen szinkronizál. ClickCRM-et most kezdtem el, ott még nem tudom, hová pakoljam a hirtelen infókat."</div>
+      <div class="meaning">Az adatok <strong>5 helyen</strong> vannak: papír, Nebo, ClickCRM, Word, gép. Nincs egy hely, amiben Ön igazán megbízna.</div>
+    </div>
+
+    <div class="heard">
+      <h3><span class="num">4</span>Papírmunka, ami digitálisan menne</h3>
+      <div class="quote">„A kötelező ügyfél-átvilágítás — nekem nagyon jó lenne, ha kimehetne email-be. Egy adatlap, amit kitölt és visszaküld."</div>
+      <div class="meaning">Az ügyfél a saját telefonján kitölthetné, Ön pedig a kész adatot kapná. <strong>E-szerződésre nincs szükség</strong> — azt drágának tartja, és most nem is kell.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 3 TOOLS -->
+<section>
+  <div class="section-num">03 — A javaslat</div>
+  <h2 class="section-title">Három eszköz, ami <em>időt ad vissza.</em></h2>
+  <p class="section-sub">Sorrendben: az első a legkisebb építés a legnagyobb mentális tehermentesítéssel. Az alábbi demók valódiak — kattintson rájuk, próbálja ki.</p>
+
+  <div class="tools">
+
+    <!-- TOOL 1 — LIVE DEMO -->
+    <div class="tool now">
+      <div class="tool-head">
+        <span class="tool-num">i.</span>
+        <span class="tool-tag">Most · 2 hét · INGYENES</span>
+      </div>
+      <h3>Esti összefoglaló + emlékeztető-asszisztens</h3>
+      <p class="pitch">Az Ön mondatára épül: <em>„hívjam fel két hét múlva — és elsodor az élet."</em> Megakadályozzuk, hogy elsodorjon.</p>
+
+      <!-- LIVE INTERACTIVE DEMO with tabs -->
+      <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-tab="voice">🎙 Hangüzenet</button>
+          <button class="tab-btn" data-tab="morning">📧 Reggeli e-mail</button>
+          <button class="tab-btn" data-tab="evening">🌙 Esti e-mail</button>
+        </div>
+        <div class="demo-head">
+          <span class="demo-label">Élő demo · próbálja ki</span>
+          <button class="demo-btn" id="demoBtn">Demo indítása →</button>
+        </div>
+
+        <!-- Tab 1: Voice -> bot reply -->
+        <div class="phone-frame demo-pane active" id="paneVoice">
+          <div class="phone-time">CSÜTÖRTÖK · 14:32</div>
+          <div class="bubble user" data-step="1">
+            <span class="b-label">🎙️ Ön — hangüzenet</span>
+            „Kovács István hívott, lakást keres a Bartók úton, hívj vissza május 22-én reggel."
+          </div>
+          <div class="typing" id="typing1"><span></span><span></span><span></span></div>
+          <div class="bubble bot" data-step="2">
+            <span class="b-label">✓ Asszisztens — 8 mp múlva</span>
+            <strong>Rögzítettem.</strong> Kovács Istvánt vissza kell hívnod <strong>május 22-én 9:00-kor</strong>. Beírtam a naplódba.
+          </div>
+          <div class="timestamp" data-step="3">— ÚJABB HANGÜZENET —</div>
+          <div class="bubble user" data-step="4">
+            <span class="b-label">🎙️ Ön — hangüzenet</span>
+            „Nagy Anna eladná a Sasad-Sashegyi lakását, holnap 10-kor visszahívom."
+          </div>
+          <div class="bubble bot" data-step="5">
+            <span class="b-label">✓ Asszisztens</span>
+            <strong>Megvan.</strong> Holnap 10:00-kor visszahívod Nagy Annát (Sasad-Sashegy, eladó).
+          </div>
+        </div>
+
+        <!-- Tab 2: Morning email -->
+        <div class="phone-frame demo-pane" id="paneMorning" style="display:none">
+          <div class="phone-time">PÉNTEK · 08:00</div>
+          <div class="bubble email" data-step="1" style="border-color:#C97B8E">
+            <span class="b-label" style="color:#9C5469">🌷 Reggeli</span>
+            <div class="e-from">asszisztens · péntek, 08:00</div>
+            <div class="e-subject">Reggeli — péntek, 2026. május 9.</div>
+            <div class="e-body">
+              <strong>Ma 2 visszahívásod van. Sorrendben:</strong><br><br>
+              <span style="display:inline-block;width:8px;height:8px;background:#C97B8E;border-radius:50%;vertical-align:middle;margin-right:6px"></span><strong>10:00</strong> — Nagy Anna · Sasad-Sashegy lakás eladó<br><br>
+              <span style="display:inline-block;width:8px;height:8px;background:#C97B8E;border-radius:50%;vertical-align:middle;margin-right:6px"></span><strong>14:30</strong> — Tóth család · 2 hete érdeklődtek<br>
+              <em style="color:#8E827E">📞 +36 30 ...</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Evening email -->
+        <div class="phone-frame demo-pane" id="paneEvening" style="display:none">
+          <div class="phone-time">CSÜTÖRTÖK · 18:00</div>
+          <div class="bubble email" data-step="1">
+            <span class="b-label">🌙 Esti</span>
+            <div class="e-from">asszisztens · csütörtök, 18:00</div>
+            <div class="e-subject">Esti összefoglaló — csütörtök</div>
+            <div class="e-body">
+              <strong>Ma rögzítettél:</strong><br>
+              › Kovács István — lakást keres, Bartók út<br>
+              › Nagy Anna — Sasad-Sashegy eladó<br>
+              › Megbízási szerződés letöltve (Tóth)<br><br>
+              <strong>Holnap (péntek):</strong><br>
+              › <strong>10:00</strong> Nagy Anna visszahívás<br>
+              › <strong>14:30</strong> Tóth család visszahívás<br><br>
+              <em style="color:#8E827E">Május 22-én még: Kovács István</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCORDIONS -->
+      <details class="acc">
+        <summary>Hogyan működik a gyakorlatban?</summary>
+        <div class="acc-body">
+          <p>Kap egy <strong>külön telefonszámot</strong> vagy egy WhatsApp-asszisztens kontaktot. Ahogy ma is telefonál, ezzel sem kell mást tennie:</p>
+          <ul>
+            <li>Hívás után rádiktál egy hangüzenetet ennek a számnak: „Kovács István, lakást keres, hívd vissza május 22-én"</li>
+            <li>Az asszisztens 1 percen belül feldolgozza: a kontaktot a ClickCRM-be teszi, az emlékeztetőt a naptárába</li>
+            <li>Este 18:00-kor email a postafiókjába: ma kiket egyeztetett, holnap kit kell hívni</li>
+            <li>Reggel 8:00-kor: <strong>„Ma kit kell felhívni"</strong> — egy listán látja</li>
+          </ul>
+          <p><strong>Új tudás kell?</strong> Nem. Aki tud telefonon hangüzenetet hagyni, az tudja használni.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Mennyi időbe telik nekem (Bernadettnek)?</summary>
+        <div class="acc-body">
+          <p><span class="lbl">Az Ön ráfordítása összesen</span></p>
+          <ul>
+            <li><strong>Indulás:</strong> 15 perc — egyszer beállítjuk a számot a telefonjára, megnézzük együtt működik-e</li>
+            <li><strong>Napi használat:</strong> 0 plusz idő — ahogy ma is telefonál, csak hangüzenettel zár</li>
+            <li><strong>Heti megtakarítás:</strong> 2-3 óra (becsült) + 0 elfelejtett kontakt</li>
+          </ul>
+          <p>A 2 hetes próbafutás <strong>ingyenes</strong>. Ha utána azt mondja, „ez jó, megtartom" — beszélünk a folytatásról. Ha nemet mond, semmi gond, leállítjuk.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Mibe kerül a folytatás (a próba után)?</summary>
+        <div class="acc-body">
+          <p>A próba után, ha tartja: <strong>10-15 ezer Ft / hónap</strong>. Ez tartalmazza:</p>
+          <ul>
+            <li>A rendszer futtatását (nálam, az Ön nevére)</li>
+            <li>Az Ön számára a hozzáférést, korlátlan használattal</li>
+            <li>Apró módosításokat, ahogy menet közben jönnek igények</li>
+          </ul>
+          <p>Nincs hosszú szerződés. Bármikor leállítható, semmi kötbér.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- TOOL 2 — FORM PREVIEW -->
+    <div class="tool soon">
+      <div class="tool-head">
+        <span class="tool-num">ii.</span>
+        <span class="tool-tag">Hamarosan · 2-3 hét</span>
+      </div>
+      <h3>Ügyfél-űrlap email-ben</h3>
+      <p class="pitch">Az Ön szavai: <em>„Egy adatlapot ő kitölthessen, és akkor visszaküldhesse nekem."</em> Pontosan ezt csináljuk meg.</p>
+
+      <!-- FORM PREVIEW — interaktív 2-state toggle -->
+      <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-fp-tab="customer">📱 Az ügyfél telefonján</button>
+          <button class="tab-btn" data-fp-tab="received">📧 Te ezt kapod</button>
+        </div>
+
+        <!-- Customer view -->
+        <div class="form-preview demo-pane active" id="fpCustomer">
+          <div class="fp-head">
+            <div class="fp-icon">U</div>
+            <div>
+              <div class="fp-title">Ügyfél-átvilágítási űrlap</div>
+              <div class="fp-sub">5 perc · az ügyfél telefonján</div>
+            </div>
+          </div>
+          <div class="fp-row"><label>Név</label><span class="val placeholder">Kovács István</span></div>
+          <div class="fp-row"><label>Lakcím</label><span class="val placeholder">Budapest, Bartók út 32.</span></div>
+          <div class="fp-row"><label>Igazolvány-szám</label><span class="val placeholder">123456 AB</span></div>
+          <div class="fp-row"><label>Mit keres</label><span class="val placeholder">Lakás, 50-70 m², XI. ker.</span></div>
+          <div class="fp-row"><label>Árhatár</label><span class="val placeholder">60-80 millió</span></div>
+        </div>
+
+        <!-- What Bernadett receives -->
+        <div class="form-preview demo-pane" id="fpReceived" style="display:none">
+          <div class="fp-head">
+            <div class="fp-icon" style="background:var(--accent-soft);color:var(--accent-deep)">B</div>
+            <div>
+              <div class="fp-title">Új ügyfél · email értesítés</div>
+              <div class="fp-sub">Postafiókodban azonnal · CRM-ben automatikusan</div>
+            </div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:8px">
+            <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.1em;margin-bottom:8px">FELADÓ: ügyfél · TÁRGY: Új érdeklődő — Kovács István</div>
+            <p style="font-size:14px;color:var(--ink);line-height:1.55;margin:0 0 8px"><strong>Kovács István</strong> kitöltötte az átvilágítási űrlapot. Az adatok a CRM-edben már bent vannak.</p>
+            <ul style="margin:0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-soft);line-height:1.7">
+              <li>📍 Budapest, Bartók út 32.</li>
+              <li>🆔 123456 AB</li>
+              <li>🔍 Lakás, 50-70 m², XI. kerület</li>
+              <li>💰 60-80 millió Ft</li>
+            </ul>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-faint);font-family:var(--mono)">PDF mellékletként is, a CRM-ben az új lapra mutató link.</div>
+          </div>
+        </div>
+      </div>
+
+      <details class="acc">
+        <summary>Hogyan működik a gyakorlatban?</summary>
+        <div class="acc-body">
+          <p>Egy egyszerű link, amit SMS-ben vagy email-ben elküld bárkinek, akivel dolgozni szeretne:</p>
+          <ul>
+            <li>Az ügyfél a <strong>saját telefonján</strong> kitölti — bárhol, bármikor</li>
+            <li>Ön egy összesített email-ben kapja, és a CRM-jében automatikusan megjelenik</li>
+            <li>Ugyanazzal a logikával: <strong>kötelező ügyfél-átvilágítás</strong> és <strong>megbízási adatlap</strong> is megoldható</li>
+            <li><strong>Nincs havidíj.</strong> Egyszer megépítjük, az Ön nevén marad</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Mennyi időt és pénzt jelent?</summary>
+        <div class="acc-body">
+          <p><span class="lbl">Az Ön ráfordítása</span></p>
+          <ul>
+            <li><strong>Beszélgetés:</strong> 30 perc — átnézzük együtt, mit szeretne kérdezni az ügyféltől</li>
+            <li><strong>Ügyfelenként megtakarítás:</strong> 20-30 perc (papírmunka eltűnik)</li>
+            <li><strong>Költsége:</strong> egyszeri <strong>30-50 ezer Ft</strong> — utána havidíj nincs</li>
+          </ul>
+          <p>Ennyi az egész. A rendszer az Ön nevén marad, hosztolva.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- TOOL 3 — SAMPLE PREVIEW -->
+    <div class="tool later">
+      <div class="tool-head">
+        <span class="tool-num">iii.</span>
+        <span class="tool-tag">Később · 4-6 hét</span>
+      </div>
+      <h3>Értékbecslés-vázlat előtöltése</h3>
+      <p class="pitch">Az Ön szavai: <em>„Van egy nagyjából sablonom, de minden értékbecslés más. Vezérfonal van."</em> A vezérfonal marad az Öné — csak a kézi adatbevitel megy el.</p>
+
+      <!-- SAMPLE WORD DOC PREVIEW — interaktív filter -->
+      <div class="demo">
+        <div class="demo-tabs">
+          <button class="tab-btn active" data-sp-filter="all">Az egész vázlat</button>
+          <button class="tab-btn" data-sp-filter="auto">Mit csinál a rendszer</button>
+          <button class="tab-btn" data-sp-filter="manual">Mit írsz Te</button>
+        </div>
+        <div class="sample-preview" id="spDoc">
+          <div class="sp-bar">ELŐNÉZET — 60-70%-ban előtöltött vázlat</div>
+          <div class="sp-body">
+            <div class="h">Értékbecslési Jelentés</div>
+            <div class="meta">Görbe utca 4/B · HRSZ 2347/3 · 2026.05.10.</div>
+            <table>
+              <tr data-kind="auto"><td>HRSZ</td><td><span class="filled">2347/3 (kivonat)</span></td></tr>
+              <tr data-kind="auto"><td>Méret (m²)</td><td><span class="filled">165 m² hasznos + 80 pince</span></td></tr>
+              <tr data-kind="auto"><td>Terhek</td><td><span class="filled">ELMŰ vezetékjog 23m²</span></td></tr>
+              <tr data-kind="auto"><td>Tulajdonosok</td><td><span class="filled">5 fő, osztatlan közös</span></td></tr>
+              <tr data-kind="auto"><td>Comparable-ek (Sasad, 2026)</td><td><span class="filled">3 hirdetés ingatlan.com-ról</span></td></tr>
+              <tr data-kind="auto"><td>Piaci kontextus</td><td><span class="filled">XI. ker. 1.289 E Ft/m² átlag</span></td></tr>
+              <tr data-kind="manual"><td>Becsült érték</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
+              <tr data-kind="manual"><td>Állapot-faktor</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
+              <tr data-kind="manual"><td>Stratégiai érvelés</td><td><span class="empty">Bernadett írja meg</span></td></tr>
+            </table>
+            <p style="font-size:12.5px;color:var(--ink-faint);margin-top:14px;font-family:var(--mono);letter-spacing:.04em">A <span style="background:var(--green-soft);color:#3A5836;padding:1px 5px;border-radius:3px">zöld</span> sorok automatikusan jönnek. A <span style="background:var(--accent-soft);color:var(--accent-deep);padding:1px 5px;border-radius:3px">rózsaszín</span> a Te szakmai részed.</p>
+          </div>
+        </div>
+      </div>
+
+      <details class="acc">
+        <summary>Hogyan működik a gyakorlatban?</summary>
+        <div class="acc-body">
+          <p>Ön ma is megkapja a tulajdoni lapot, az alaprajzokat, a címet. Új munkamenet:</p>
+          <ul>
+            <li>Feltölti a tulajdoni lap PDF-et + a címet (ahogy ma is teszi)</li>
+            <li>A rendszer az Ön <strong>saját Word-sablonja</strong> alapján visszaad egy 60-70%-ban előtöltött vázlatot</li>
+            <li>Automatikusan benne lesz: alapadatok, comparable hirdetések, piaci kontextus</li>
+            <li>Ön <strong>csak a szakmai részt</strong> írja meg — az adatbevitel ami eddig másfél óra volt, eltűnik</li>
+          </ul>
+          <p>A végeredmény az <strong>Ön értékbecslése</strong> marad: az Ön szavaival, az Ön vezérfonalán.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Mennyi időt és pénzt jelent?</summary>
+        <div class="acc-body">
+          <p><span class="lbl">Az Ön ráfordítása</span></p>
+          <ul>
+            <li><strong>Indulás:</strong> 1-2 óra — együtt megnézzük az Ön Word-sablonját, betanítjuk a rendszert</li>
+            <li><strong>Becslésenként megtakarítás:</strong> 1-2 óra</li>
+            <li><strong>Költség modell A:</strong> egyszeri ~250 ezer Ft + havi 5-10 ezer hosting</li>
+            <li><strong>Költség modell B:</strong> per-becslés 5-8 ezer Ft / előtöltött vázlat (Ön dönti el, mikor kéri)</li>
+          </ul>
+          <p>Erről a 2-es eszköz után beszélünk — addig ne is gondoljon rá.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFFER SUMMARY -->
+<section>
+  <div class="section-num">04 — Áttekintés</div>
+  <h2 class="section-title">Tisztán, <em>kerek számokban.</em></h2>
+  <p class="section-sub">Egy oldalon, hogy lássa a nagyságrendet. Az első eszköz teljesen ingyenes két hétig — utána Ön dönt.</p>
+
+  <div class="offer-table">
+    <table>
+      <thead>
+        <tr><th>Eszköz</th><th>Mennyi idő</th><th>Mibe kerül</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>i. Esti összefoglaló + emlékeztető<span class="sub">A legkisebb építés, a legnagyobb hatás</span></td>
+          <td>Próba: 2 hét<span class="sub">Élesben az Ön telefonján</span></td>
+          <td><span class="free">INGYENES PRÓBA</span><span class="sub">Folytatás: 10-15 ezer Ft / hó</span></td>
+        </tr>
+        <tr>
+          <td>ii. Ügyfél-űrlap email-ben<span class="sub">Átvilágítás, megbízási adatlap</span></td>
+          <td>Beszélgetés + építés: 2-3 hét</td>
+          <td>Egyszeri 30-50 ezer Ft<span class="sub">Havidíj: nincs</span></td>
+        </tr>
+        <tr>
+          <td>iii. Értékbecslés-vázlat<span class="sub">Az Ön sablonján, automatikus előtöltés</span></td>
+          <td>Nagyobb projekt: 4-6 hét</td>
+          <td>~250 ezer Ft setup<span class="sub">vagy 5-8 ezer Ft / becslés</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="section-num">05 — Következő lépés</div>
+  <h2 class="section-title">Hogyan kezdjünk neki — <em>ha érdekli.</em></h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot rose">i</div>
+      <div class="tl-content">
+        <h4>30 perc — átbeszéljük a 1-es eszközt</h4>
+        <p>Online vagy egy kávé mellett, ahogy Önnek kényelmes. Csak az 1-es eszközről beszélünk — a 2-es és 3-as csak akkor jön szóba, ha az 1-es bevált.</p>
+        <span class="effort">KÖTELEZETTSÉG NÉLKÜL</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gold">ii</div>
+      <div class="tl-content">
+        <h4>2 hét próbafutás — élesben</h4>
+        <p>Megépítem az Ön telefonszámára és email-címére. Ön használja, ahogy szokott telefonálni. Két hét után megnézzük: bevált, vagy nem.</p>
+        <span class="effort">A PRÓBA INGYENES</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot green">iii</div>
+      <div class="tl-content">
+        <h4>Ha tetszik — megyünk a 2-esre</h4>
+        <p>Ha az 1-es bevált, beszélünk a folytatásról és a 2-es eszközről. A 3-as értékbecslés-vázlat csak később jöhet, ha igazán szeretné.</p>
+        <span class="effort">ÖN DIKTÁLJA A TEMPÓT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<div class="container">
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Beszéljünk <em>30 percet</em> — ennyi az egész.</h2>
+  <p>Online vagy egy kávé mellett. Az 1-es eszköz részleteit átbeszéljük, kérdéseit megválaszolom. Semmi nyomás.</p>
+  <div class="cta-row">
+    <a href="mailto:zsolti@smilestone.hu?subject=Bernadett%20%E2%80%94%20A%20javaslatr%C3%B3l%20besz%C3%A9lj%C3%BCnk&body=Kedves%20Zsolt%2C%0A%0AOlvastam%20a%20javaslatot.%20Sz%C3%ADvesen%20besz%C3%A9ln%C3%A9k%2030%20percet%20az%201-es%20eszk%C3%B6zr%C5%91l.%0A%0A%C3%9Cdv%C3%B6zlettel%2C%0ABernadett" class="cta-btn primary"><span class="ico">✉</span> Email küldése</a>
+    <a href="tel:+36706840031" class="cta-btn ghost"><span class="ico">☎</span> +36 70 684 0031</a>
+  </div>
+</div>
+</div>
+
+<footer>
+  <p>Készült Ropoli Bernadettnek · 2026. május 8.</p>
+  <p class="sig">— Zsolt</p>
+  <p class="small">Ez egy személyes javaslat, nem nyilvános anyag — a pénteki beszélgetésünk és az Ön elmondott pontjai alapján állt össze. Bizalmas.</p>
+</footer>
+
+<script>
+(function(){
+  /* ============== TOOL 1 — phone demo with tabs ============== */
+  var btn=document.getElementById('demoBtn');
+  var typing=document.getElementById('typing1');
+  var t1timeouts=[];
+  var currentTab='voice';
+
+  function panes(){return document.querySelectorAll('.demo-tabs ~ .demo-pane, .demo-pane');}
+
+  function showPane(name){
+    document.querySelectorAll('[data-tab]').forEach(function(b){
+      b.classList.toggle('active', b.dataset.tab===name);
+    });
+    var voice=document.getElementById('paneVoice');
+    var morning=document.getElementById('paneMorning');
+    var evening=document.getElementById('paneEvening');
+    if(voice) voice.style.display = name==='voice' ? 'flex' : 'none';
+    if(morning) morning.style.display = name==='morning' ? 'flex' : 'none';
+    if(evening) evening.style.display = name==='evening' ? 'flex' : 'none';
+    currentTab=name;
+    resetT1();
+  }
+
+  function resetT1(){
+    t1timeouts.forEach(clearTimeout);
+    t1timeouts=[];
+    document.querySelectorAll('.phone-frame [data-step]').forEach(function(b){b.classList.remove('visible')});
+    if(typing) typing.classList.remove('visible');
+    if(btn){btn.disabled=false;btn.textContent='Demo indítása →';}
+  }
+
+  function playT1(){
+    resetT1();
+    if(!btn) return;
+    btn.disabled=true;
+    btn.textContent='Lejátszás...';
+
+    var pane;
+    if(currentTab==='voice') pane=document.getElementById('paneVoice');
+    if(currentTab==='morning') pane=document.getElementById('paneMorning');
+    if(currentTab==='evening') pane=document.getElementById('paneEvening');
+    if(!pane) return;
+
+    var bubbles=pane.querySelectorAll('[data-step]');
+
+    if(currentTab==='voice'){
+      // 5-step animation
+      t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
+      t1timeouts.push(setTimeout(function(){if(typing)typing.classList.add('visible')},1400));
+      t1timeouts.push(setTimeout(function(){
+        if(typing)typing.classList.remove('visible');
+        bubbles[1].classList.add('visible');
+      },3200));
+      t1timeouts.push(setTimeout(function(){bubbles[2].classList.add('visible')},5000));
+      t1timeouts.push(setTimeout(function(){bubbles[3].classList.add('visible')},5800));
+      t1timeouts.push(setTimeout(function(){bubbles[4].classList.add('visible')},7800));
+      t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},9000));
+    } else {
+      // Single email reveal
+      t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
+      t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},1500));
+    }
+  }
+
+  document.querySelectorAll('[data-tab]').forEach(function(b){
+    b.addEventListener('click', function(){showPane(b.dataset.tab)});
+  });
+  if(btn) btn.addEventListener('click', playT1);
+
+  /* ============== TOOL 2 — form preview tabs ============== */
+  document.querySelectorAll('[data-fp-tab]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var tab=b.dataset.fpTab;
+      document.querySelectorAll('[data-fp-tab]').forEach(function(x){x.classList.toggle('active',x===b)});
+      var c=document.getElementById('fpCustomer');
+      var r=document.getElementById('fpReceived');
+      if(c) c.style.display = tab==='customer' ? 'block' : 'none';
+      if(r) r.style.display = tab==='received' ? 'block' : 'none';
+    });
+  });
+
+  /* ============== TOOL 3 — sample doc filter ============== */
+  document.querySelectorAll('[data-sp-filter]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var f=b.dataset.spFilter;
+      document.querySelectorAll('[data-sp-filter]').forEach(function(x){x.classList.toggle('active',x===b)});
+      document.querySelectorAll('#spDoc tr[data-kind]').forEach(function(tr){
+        if(f==='all'){tr.style.opacity='1';tr.style.filter='none'}
+        else if(tr.dataset.kind===f){tr.style.opacity='1';tr.style.filter='none'}
+        else{tr.style.opacity='0.25';tr.style.filter='grayscale(.5)'}
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
