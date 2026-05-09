@@ -868,6 +868,7 @@ footer .small{
       <div class="demo">
         <div class="demo-tabs">
           <button class="tab-btn active" data-tab="voice">🎙 Hangüzenet</button>
+          <button class="tab-btn" data-tab="list">💬 /lista parancs</button>
           <button class="tab-btn" data-tab="morning">📧 Reggeli e-mail</button>
           <button class="tab-btn" data-tab="evening">🌙 Esti e-mail</button>
         </div>
@@ -896,6 +897,28 @@ footer .small{
           <div class="bubble bot" data-step="5">
             <span class="b-label">✓ Asszisztens</span>
             <strong>Megvan.</strong> Holnap 10:00-kor visszahívod Nagy Annát (Sasad-Sashegy, eladó).
+          </div>
+        </div>
+
+        <!-- Tab "list": /lista command -->
+        <div class="phone-frame demo-pane" id="paneList" style="display:none">
+          <div class="phone-time">SZERDA · 09:14</div>
+          <div class="bubble user" data-step="1">
+            <span class="b-label">💬 Ön — szöveg</span>
+            /lista
+          </div>
+          <div class="typing"><span></span><span></span><span></span></div>
+          <div class="bubble bot" data-step="2" style="max-width:92%">
+            <span class="b-label">📋 Asszisztens</span>
+            <strong>Mai és holnapi teendőid</strong><br><br>
+            <strong>Ma (2026-05-22):</strong><br>
+            • <strong>09:00</strong> Kovács István <code style="font-family:var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:3px;font-size:11px;color:var(--accent-deep)">A7K2</code><br>
+            <em style="color:var(--ink-faint);font-size:13px">  lakást keres a Bartók úton</em><br>
+            • <strong>14:30</strong> Tóth család <code style="font-family:var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:3px;font-size:11px;color:var(--accent-deep)">B9M4</code><br>
+            <em style="color:var(--ink-faint);font-size:13px">  szerződést kérnek</em><br><br>
+            <strong>Holnap (2026-05-23):</strong><br>
+            • <strong>10:00</strong> Nagy Anna <code style="font-family:var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:3px;font-size:11px;color:var(--accent-deep)">C3X7</code><br>
+            <em style="color:var(--ink-faint);font-size:13px">  Sasad-Sashegy lakás eladó</em>
           </div>
         </div>
 
@@ -1218,9 +1241,15 @@ footer .small{
 (function(){
   /* ============== TOOL 1 — phone demo with tabs ============== */
   var btn=document.getElementById('demoBtn');
-  var typing=document.getElementById('typing1');
   var t1timeouts=[];
   var currentTab='voice';
+
+  function getTyping(){
+    var pane;
+    if(currentTab==='voice') pane=document.getElementById('paneVoice');
+    if(currentTab==='list') pane=document.getElementById('paneList');
+    return pane ? pane.querySelector('.typing') : null;
+  }
 
   function panes(){return document.querySelectorAll('.demo-tabs ~ .demo-pane, .demo-pane');}
 
@@ -1229,9 +1258,11 @@ footer .small{
       b.classList.toggle('active', b.dataset.tab===name);
     });
     var voice=document.getElementById('paneVoice');
+    var list=document.getElementById('paneList');
     var morning=document.getElementById('paneMorning');
     var evening=document.getElementById('paneEvening');
     if(voice) voice.style.display = name==='voice' ? 'flex' : 'none';
+    if(list) list.style.display = name==='list' ? 'flex' : 'none';
     if(morning) morning.style.display = name==='morning' ? 'flex' : 'none';
     if(evening) evening.style.display = name==='evening' ? 'flex' : 'none';
     currentTab=name;
@@ -1242,7 +1273,7 @@ footer .small{
     t1timeouts.forEach(clearTimeout);
     t1timeouts=[];
     document.querySelectorAll('.phone-frame [data-step]').forEach(function(b){b.classList.remove('visible')});
-    if(typing) typing.classList.remove('visible');
+    document.querySelectorAll('.typing').forEach(function(t){t.classList.remove('visible')});
     if(btn){btn.disabled=false;btn.textContent='Demo indítása →';}
   }
 
@@ -1254,6 +1285,7 @@ footer .small{
 
     var pane;
     if(currentTab==='voice') pane=document.getElementById('paneVoice');
+    if(currentTab==='list') pane=document.getElementById('paneList');
     if(currentTab==='morning') pane=document.getElementById('paneMorning');
     if(currentTab==='evening') pane=document.getElementById('paneEvening');
     if(!pane) return;
@@ -1263,15 +1295,24 @@ footer .small{
     if(currentTab==='voice'){
       // 5-step animation
       t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
-      t1timeouts.push(setTimeout(function(){if(typing)typing.classList.add('visible')},1400));
+      t1timeouts.push(setTimeout(function(){{var t=getTyping();if(t)t.classList.add('visible')}},1400));
       t1timeouts.push(setTimeout(function(){
-        if(typing)typing.classList.remove('visible');
+        {var t=getTyping();if(t)t.classList.remove('visible')};
         bubbles[1].classList.add('visible');
       },3200));
       t1timeouts.push(setTimeout(function(){bubbles[2].classList.add('visible')},5000));
       t1timeouts.push(setTimeout(function(){bubbles[3].classList.add('visible')},5800));
       t1timeouts.push(setTimeout(function(){bubbles[4].classList.add('visible')},7800));
       t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},9000));
+    } else if(currentTab==='list'){
+      // /lista: user types command, bot responds
+      t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
+      t1timeouts.push(setTimeout(function(){{var t=getTyping();if(t)t.classList.add('visible')}},1100));
+      t1timeouts.push(setTimeout(function(){
+        {var t=getTyping();if(t)t.classList.remove('visible')};
+        bubbles[1].classList.add('visible');
+      },2400));
+      t1timeouts.push(setTimeout(function(){btn.disabled=false;btn.textContent='Újrajátszás ↻';},3500));
     } else {
       // Single email reveal
       t1timeouts.push(setTimeout(function(){bubbles[0].classList.add('visible')},300));
