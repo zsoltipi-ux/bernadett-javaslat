@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<noscript><style>.reveal,.hero-stagger > *{opacity:1!important;transform:none!important}</style></noscript>
+
 <style>
 :root{
   --bg:#FAF6F2;
@@ -37,7 +39,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{
   font-family:var(--sans);
   color:var(--ink);
@@ -47,7 +49,12 @@ body{
   -webkit-text-size-adjust:100%;
   position:relative;
   overflow-x:hidden;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
+  font-variant-numeric:oldstyle-nums proportional-nums;
 }
+
+/* Atmospheric base — két radial fény + finom paper-grain SVG noise overlay */
 body::before{
   content:"";
   position:fixed;inset:0;
@@ -56,6 +63,54 @@ body::before{
     radial-gradient(ellipse at 90% 30%, rgba(201,168,117,.06) 0%, transparent 45%);
   pointer-events:none;z-index:0;
 }
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.10 0 0 0 0 0.10 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity:.55;
+  mix-blend-mode:multiply;
+  pointer-events:none;z-index:0;
+}
+
+/* Scroll-progress vékony arany szalag a viewport tetején */
+.scroll-progress{
+  position:fixed;top:0;left:0;
+  height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--gold) 100%);
+  z-index:1000;
+  transition:width .12s ease-out;
+  box-shadow:0 0 8px rgba(201,123,142,.3);
+}
+
+/* Custom selection */
+::selection{background:var(--accent-soft);color:var(--accent-deep)}
+::-moz-selection{background:var(--accent-soft);color:var(--accent-deep)}
+
+/* Tipográfiai finomítás — display ligatures + opsz */
+h1,h2,h3,.section-title,.lede{
+  font-feature-settings:"kern" 1,"liga" 1,"dlig" 1,"calt" 1,"ss01" 1;
+  font-variation-settings:"opsz" 32;
+}
+.serif,em,i{
+  font-feature-settings:"kern" 1,"liga" 1,"dlig" 1,"calt" 1;
+}
+.mono,code{
+  font-feature-settings:"tnum" 1,"zero" 1,"ss01" 1;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Stagger fade-in a scroll-megjelenéshez */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* Belépő stagger a hero-elemekre */
+.hero-stagger > *{opacity:0;transform:translateY(8px);animation:hero-in .9s cubic-bezier(.22,1,.36,1) forwards}
+.hero-stagger > *:nth-child(1){animation-delay:.05s}
+.hero-stagger > *:nth-child(2){animation-delay:.18s}
+.hero-stagger > *:nth-child(3){animation-delay:.36s}
+.hero-stagger > *:nth-child(4){animation-delay:.52s}
+@keyframes hero-in{to{opacity:1;transform:translateY(0)}}
+
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:transparent;color:inherit}
 
@@ -75,21 +130,33 @@ button{font:inherit;cursor:pointer;border:0;background:transparent;color:inherit
 
 /* HERO */
 .hero{
-  padding:88px 24px 56px;
+  padding:96px 24px 64px;
   text-align:center;
   position:relative;
   z-index:1;
 }
-.hero-inner{max-width:720px;margin:0 auto}
-.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:32px}
-.hero .eyebrow::before,.hero .eyebrow::after{content:"";width:24px;height:1px;background:var(--accent-deep);opacity:.5}
+.hero-inner{max-width:720px;margin:0 auto;position:relative}
+/* Asszimetrikus díszítő — a hero szám-marker, mint egy magazin folio */
+.hero-inner::before{
+  content:"№ 01";
+  position:absolute;
+  top:-12px;left:50%;transform:translateX(-50%) rotate(-1deg);
+  font-family:var(--serif);
+  font-style:italic;font-weight:300;
+  font-size:13px;letter-spacing:.08em;
+  color:var(--accent-deep);
+  opacity:.55;
+  white-space:nowrap;
+}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:36px}
+.hero .eyebrow::before,.hero .eyebrow::after{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-deep),transparent);opacity:.55}
 .hero h1{
   font-family:var(--serif);
   font-weight:300;
-  font-size:clamp(38px,7vw,68px);
-  line-height:1.05;
-  letter-spacing:-.02em;
-  margin-bottom:24px;
+  font-size:clamp(40px,7.4vw,72px);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin-bottom:28px;
   color:var(--ink);
   text-wrap:balance;
 }
@@ -97,7 +164,23 @@ button{font:inherit;cursor:pointer;border:0;background:transparent;color:inherit
   font-style:italic;
   color:var(--accent-deep);
   font-weight:400;
+  position:relative;
+  display:inline-block;
 }
+/* Az em alatti finom arany horgony — italic accent */
+.hero h1 em::after{
+  content:"";
+  position:absolute;
+  left:2%;right:6%;bottom:.06em;
+  height:.14em;
+  background:var(--accent-soft);
+  z-index:-1;
+  border-radius:3px;
+  transform:scaleX(0);
+  transform-origin:left;
+  animation:hero-underline 1.4s cubic-bezier(.22,1,.36,1) .9s forwards;
+}
+@keyframes hero-underline{to{transform:scaleX(1)}}
 .hero .lede{
   font-family:var(--serif);
   font-style:italic;
@@ -152,101 +235,172 @@ section+section{border-top:1px solid var(--line)}
   line-height:1.65;
 }
 
-/* PERSONAL LETTER */
+/* PERSONAL LETTER — kéziratos érzet, magazin-spine */
 .letter{
-  background:var(--bg-card);
+  background:#FFFCF7;
   border:1px solid var(--line);
-  border-left:3px solid var(--gold);
   border-radius:var(--radius);
-  padding:32px 32px 28px;
-  margin:24px 0 16px;
+  padding:38px 36px 32px 44px;
+  margin:32px 0 16px;
   position:relative;
+  box-shadow:
+    0 1px 2px rgba(31,26,26,.04),
+    0 12px 36px -16px rgba(201,168,117,.18);
 }
+/* Aranyozott "spine" baloldalt — mint egy magazin gerinc */
 .letter::before{
   content:"";
   position:absolute;
-  top:0;left:0;right:0;height:80px;
-  background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%);
-  opacity:.35;
-  border-radius:var(--radius) var(--radius) 0 0;
-  pointer-events:none;
+  top:14px;bottom:14px;left:14px;
+  width:2px;
+  background:linear-gradient(180deg,var(--gold) 0%,rgba(201,168,117,.3) 60%,transparent 100%);
+  border-radius:1px;
+}
+/* Felül halvány arany glow + dátum-pecsét jobb felső sarokba */
+.letter::after{
+  content:"BUDAPEST · 2026 · V";
+  position:absolute;
+  top:18px;right:22px;
+  font-family:var(--mono);
+  font-size:9px;letter-spacing:.22em;
+  color:var(--gold);
+  opacity:.7;
+  font-weight:500;
 }
 .letter-eyebrow{
   font-family:var(--mono);
   font-size:10.5px;
-  letter-spacing:.2em;
+  letter-spacing:.22em;
   text-transform:uppercase;
   color:var(--gold);
   font-weight:500;
-  margin-bottom:18px;
+  margin-bottom:22px;
   position:relative;
+  display:inline-flex;align-items:center;gap:10px;
 }
+.letter-eyebrow::before{content:"❀";color:var(--accent);opacity:.6;font-size:11px}
 .letter p{
   font-family:var(--serif);
-  font-size:18px;
-  line-height:1.6;
+  font-size:18.5px;
+  line-height:1.62;
   color:var(--ink-soft);
-  margin-bottom:16px;
+  margin-bottom:18px;
   position:relative;
-  letter-spacing:-.005em;
+  letter-spacing:-.003em;
+  font-feature-settings:"kern" 1,"liga" 1,"dlig" 1;
+}
+/* Drop cap az első bekezdésen — finom serif */
+.letter p:first-of-type::first-letter{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  font-size:3.4em;
+  float:left;
+  line-height:.9;
+  margin:.04em .12em -.06em -.02em;
+  color:var(--accent-deep);
 }
 .letter p:last-child{margin-bottom:0}
 .letter strong{color:var(--ink);font-weight:500}
 .letter em{font-style:italic;color:var(--accent-deep)}
 .letter .signoff{
-  margin-top:24px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
+  margin-top:30px;
+  padding-top:22px;
+  border-top:1px dashed var(--line-strong);
   font-style:italic;
-  font-size:17px;
+  font-size:19px;
+  font-family:var(--serif);
+  color:var(--ink);
+  position:relative;
+}
+.letter .signoff::after{
+  content:"~";
+  display:inline-block;
+  margin-left:10px;
+  color:var(--accent);
+  font-style:normal;
+  transform:rotate(-12deg);
+  display:inline-block;
 }
 
-/* HEARD CARDS */
-.heard-grid{display:grid;gap:14px;margin:24px 0}
+/* HEARD CARDS — magazin pull-quote érzet */
+.heard-grid{display:grid;gap:18px;margin:28px 0}
 .heard{
   background:var(--bg-card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:24px 26px;
-  transition:border-color .25s,transform .25s;
+  padding:28px 30px;
+  position:relative;
+  transition:border-color .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s cubic-bezier(.22,1,.36,1);
 }
-.heard:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+.heard:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px -28px rgba(201,123,142,.4);
+}
+/* Magazin-szám marker — bal-felső sarokban serif italic */
+.heard .num{
+  position:absolute;
+  top:18px;right:24px;
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  font-size:34px;
+  line-height:1;
+  color:var(--accent);
+  opacity:.55;
+  letter-spacing:-.02em;
+  background:transparent;
+  width:auto;height:auto;
+  display:block;
+}
 .heard h3{
   font-family:var(--serif);
-  font-size:20px;
+  font-size:21px;
   font-weight:400;
-  letter-spacing:-.005em;
-  margin-bottom:12px;
-  display:flex;align-items:center;gap:12px;
+  letter-spacing:-.012em;
+  margin-bottom:16px;
   color:var(--ink);
+  padding-right:50px;
+  display:block;
 }
-.heard .num{
-  font-family:var(--mono);
-  font-size:12px;
-  color:var(--accent-deep);
-  background:var(--accent-soft);
-  width:26px;height:26px;
-  border-radius:50%;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-weight:500;
-  flex-shrink:0;
-}
+/* A nagy italic idézet — pull-quote stílus */
 .heard .quote{
   font-family:var(--serif);
   font-style:italic;
-  color:var(--ink-soft);
-  font-size:16px;
-  line-height:1.55;
-  padding:12px 16px;
-  background:var(--bg);
-  border-left:2px solid var(--accent-soft);
-  border-radius:0 8px 8px 0;
-  margin-bottom:12px;
+  font-weight:300;
+  color:var(--ink);
+  font-size:21px;
+  line-height:1.42;
+  letter-spacing:-.008em;
+  padding:18px 0 18px 22px;
+  background:transparent;
+  border-left:2px solid var(--accent);
+  border-radius:0;
+  margin-bottom:14px;
+  position:relative;
+}
+.heard .quote::before{
+  content:"";
+  position:absolute;
+  left:-2px;top:0;
+  width:2px;height:14px;
+  background:var(--bg-card);
+}
+.heard .quote::after{
+  content:"";
+  position:absolute;
+  left:-2px;bottom:0;
+  width:2px;height:14px;
+  background:var(--bg-card);
 }
 .heard .meaning{
   font-size:14.5px;
   color:var(--ink-soft);
-  line-height:1.6;
+  line-height:1.62;
+  letter-spacing:.001em;
+  padding-left:22px;
+  border-left:1px dashed var(--line);
 }
 .heard .meaning strong{color:var(--ink);font-weight:600}
 
@@ -366,12 +520,30 @@ section+section{border-top:1px solid var(--line)}
 
 .phone-frame{
   background:#fff;
-  border-radius:14px;
-  padding:18px 16px;
-  min-height:260px;
-  display:flex;flex-direction:column;gap:12px;
+  border-radius:22px;
+  padding:14px 14px 18px;
+  min-height:280px;
+  display:flex;flex-direction:column;gap:10px;
   border:1px solid var(--line);
-  box-shadow:0 1px 0 rgba(0,0,0,.02);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    0 1px 2px rgba(31,26,26,.04),
+    0 18px 40px -22px rgba(31,26,26,.18);
+  position:relative;
+  overflow:hidden;
+}
+/* iOS-szerű status bar — kis idő, signal, wifi, battery */
+.phone-frame::before{
+  content:"";
+  display:block;
+  height:18px;
+  margin:-4px -8px 4px;
+  background:
+    /* notch */
+    radial-gradient(ellipse at 50% 0%, var(--ink) 0%, var(--ink) 8px, transparent 8px) no-repeat,
+    transparent;
+  background-size:auto;
+  position:relative;
 }
 .phone-time{
   font-family:var(--mono);
@@ -379,33 +551,110 @@ section+section{border-top:1px solid var(--line)}
   color:var(--ink-faint);
   letter-spacing:.1em;
   text-align:center;
-  padding:4px 0 8px;
+  padding:0 0 10px;
   border-bottom:1px solid var(--line);
-  margin-bottom:4px;
+  margin-bottom:6px;
+  position:relative;
+  font-weight:500;
+}
+.phone-time::before{
+  content:"●●●●●  Telegram";
+  position:absolute;
+  left:8px;top:0;
+  font-size:8.5px;
+  color:var(--ink-faint);
+  letter-spacing:.05em;
+  font-weight:400;
+  opacity:.7;
+}
+.phone-time::after{
+  content:"100%";
+  position:absolute;
+  right:8px;top:0;
+  font-size:8.5px;
+  color:var(--ink-faint);
+  letter-spacing:.05em;
+  font-weight:500;
+  opacity:.8;
 }
 .bubble{
-  max-width:85%;
-  padding:10px 14px;
-  border-radius:14px;
+  max-width:84%;
+  padding:11px 14px 8px;
+  border-radius:16px;
   font-size:14px;
   line-height:1.45;
-  opacity:0;transform:translateY(8px);
-  transition:opacity .35s,transform .35s;
+  opacity:0;transform:translateY(10px) scale(.97);
+  transition:opacity .42s cubic-bezier(.22,1,.36,1),transform .42s cubic-bezier(.22,1,.36,1);
   position:relative;
+  word-wrap:break-word;
 }
-.bubble.visible{opacity:1;transform:translateY(0)}
+.bubble.visible{opacity:1;transform:translateY(0) scale(1)}
+
 .bubble.user{
-  background:var(--accent-soft);
+  background:linear-gradient(180deg,#F2DCE0 0%,#EBCFD5 100%);
   color:var(--accent-deep);
   align-self:flex-end;
-  border-bottom-right-radius:4px;
+  border-bottom-right-radius:5px;
+  box-shadow:0 1px 1px rgba(201,123,142,.12);
 }
+/* User bubble-tail — iMessage-szerű kis hegyes vissza-curl */
+.bubble.user::after{
+  content:"";
+  position:absolute;
+  right:-5px;bottom:0;
+  width:14px;height:14px;
+  background:linear-gradient(180deg,#F2DCE0 0%,#EBCFD5 100%);
+  border-bottom-left-radius:14px;
+  clip-path:polygon(0 0,100% 100%,0 100%);
+  transform:scaleX(-1);
+}
+.bubble.user::before{
+  content:"";
+  position:absolute;
+  right:-7px;bottom:0;
+  width:7px;height:14px;
+  background:#fff;
+  border-bottom-left-radius:8px;
+}
+
 .bubble.bot{
-  background:var(--bg-soft);
+  background:#F1ECE6;
   color:var(--ink);
   align-self:flex-start;
-  border-bottom-left-radius:4px;
+  border-bottom-left-radius:5px;
+  box-shadow:0 1px 1px rgba(31,26,26,.04);
 }
+.bubble.bot::after{
+  content:"";
+  position:absolute;
+  left:-5px;bottom:0;
+  width:14px;height:14px;
+  background:#F1ECE6;
+  border-bottom-right-radius:14px;
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+  transform:scaleX(-1);
+}
+.bubble.bot::before{
+  content:"";
+  position:absolute;
+  left:-7px;bottom:0;
+  width:7px;height:14px;
+  background:#fff;
+  border-bottom-right-radius:8px;
+}
+
+/* Delivery tick — csak user-bubble-eken, picike kettős pipa */
+.bubble.user .b-tick{
+  position:absolute;
+  bottom:4px;right:8px;
+  font-size:9.5px;
+  color:var(--accent-deep);
+  opacity:.65;
+  font-family:var(--mono);
+  letter-spacing:-.05em;
+  pointer-events:none;
+}
+.bubble.user .b-tick::after{content:"✓✓"}
 .bubble.email{
   background:#fff;
   border:1px solid var(--gold);
@@ -774,14 +1023,20 @@ footer .small{
 
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0s!important;transition-duration:0s!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .hero-stagger > *{opacity:1!important;transform:none!important}
+  .hero h1 em::after{transform:scaleX(1)!important}
 }
 </style>
 </head>
 <body>
 
+<!-- Scroll-progress arany szalag -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
+  <div class="hero-inner hero-stagger">
     <div class="eyebrow">Személyes javaslat</div>
     <h1>Senki ne maradjon ki — <em>aki Önnel szeretne dolgozni.</em></h1>
     <p class="lede">A péntek 14:30-i beszélgetésünk után, abból amit Ön mondott — három olyan eszköz, ami időt ad vissza a hétköznapokba.</p>
@@ -813,7 +1068,7 @@ footer .small{
 </section>
 
 <!-- AMIT HALLOTTAM -->
-<section>
+<section class="reveal">
   <div class="section-num">02 — Amit hallottam Öntől</div>
   <h2 class="section-title">Négy téma, ami <em>többször előjött.</em></h2>
   <p class="section-sub">A felvételt visszaolvastam. Ez a négy dolog jött elő a leghangsúlyosabban — nem azért, mert én ezt akartam hallani, hanem mert Ön ezt mondta.</p>
@@ -848,7 +1103,7 @@ footer .small{
 </section>
 
 <!-- 3 TOOLS -->
-<section>
+<section class="reveal">
   <div class="section-num">03 — A javaslat</div>
   <h2 class="section-title">Három eszköz, ami <em>időt ad vissza.</em></h2>
   <p class="section-sub">Sorrendben: az első a legkisebb építés a legnagyobb mentális tehermentesítéssel. Az alábbi demók valódiak — kattintson rájuk, próbálja ki.</p>
@@ -882,6 +1137,7 @@ footer .small{
           <div class="phone-time">CSÜTÖRTÖK · 14:32</div>
           <div class="bubble user" data-step="1">
             <span class="b-label">🎙️ Ön — hangüzenet</span>
+            <span class="b-tick"></span>
             „Kovács István hívott, lakást keres a Bartók úton, hívj vissza május 22-én reggel."
           </div>
           <div class="typing" id="typing1"><span></span><span></span><span></span></div>
@@ -905,6 +1161,7 @@ footer .small{
           <div class="phone-time">SZERDA · 09:14</div>
           <div class="bubble user" data-step="1">
             <span class="b-label">💬 Ön — szöveg</span>
+            <span class="b-tick"></span>
             /lista
           </div>
           <div class="typing"><span></span><span></span><span></span></div>
@@ -1153,7 +1410,7 @@ footer .small{
 </section>
 
 <!-- OFFER SUMMARY -->
-<section>
+<section class="reveal">
   <div class="section-num">04 — Áttekintés</div>
   <h2 class="section-title">Tisztán, <em>kerek számokban.</em></h2>
   <p class="section-sub">Egy oldalon, hogy lássa a nagyságrendet. Az első eszköz teljesen ingyenes két hétig — utána Ön dönt.</p>
@@ -1185,7 +1442,7 @@ footer .small{
 </section>
 
 <!-- TIMELINE -->
-<section>
+<section class="reveal">
   <div class="section-num">05 — Következő lépés</div>
   <h2 class="section-title">Hogyan kezdjünk neki — <em>ha érdekli.</em></h2>
 
@@ -1239,6 +1496,31 @@ footer .small{
 
 <script>
 (function(){
+  /* ============== SCROLL PROGRESS BAR ============== */
+  var sp=document.getElementById('scrollProgress');
+  function updateProgress(){
+    if(!sp) return;
+    var h=document.documentElement;
+    var scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+    sp.style.width=Math.min(100,Math.max(0,scrolled*100))+'%';
+  }
+  window.addEventListener('scroll',updateProgress,{passive:true});
+  window.addEventListener('resize',updateProgress);
+  updateProgress();
+
+  /* ============== SCROLL REVEAL ============== */
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && reveals.length){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){io.observe(el);});
+  } else {
+    reveals.forEach(function(el){el.classList.add('in');});
+  }
+
   /* ============== TOOL 1 — phone demo with tabs ============== */
   var btn=document.getElementById('demoBtn');
   var t1timeouts=[];
