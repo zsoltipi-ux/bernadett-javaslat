@@ -912,6 +912,81 @@ details.acc summary:hover{color:var(--accent-deep)}
   letter-spacing:.06em;
 }
 
+/* FUTURES — hosszú-távú lehetőségek (06) */
+.futures-section{position:relative}
+.futures-section::before{
+  content:"";
+  position:absolute;
+  top:64px;left:50%;transform:translateX(-50%);
+  width:1px;height:40px;
+  background:linear-gradient(180deg,transparent,var(--gold) 50%,transparent);
+  opacity:.5;
+  pointer-events:none;
+}
+.futures{display:grid;gap:10px;margin:28px 0 16px}
+.futures details.fut{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+  transition:border-color .25s,background .25s;
+}
+.futures details.fut[open]{border-color:var(--accent-soft);background:var(--bg-card)}
+.futures details.fut summary{
+  padding:16px 20px;
+  cursor:pointer;
+  display:flex;align-items:baseline;gap:10px;
+  flex-wrap:wrap;
+  font-size:15px;
+  list-style:none;
+  user-select:none;
+  color:var(--ink);
+  position:relative;
+  transition:background .15s;
+}
+.futures details.fut summary::-webkit-details-marker{display:none}
+.futures details.fut summary:hover{background:var(--bg-soft)}
+.futures details.fut summary::after{
+  content:"+";
+  position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  font-family:var(--serif);font-size:22px;font-weight:300;
+  color:var(--accent);
+  transition:transform .25s;
+  line-height:1;
+}
+.futures details.fut[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.futures .fut-ico{font-size:18px;line-height:1;flex-shrink:0;width:22px;text-align:center}
+.futures .fut-label{font-weight:500;color:var(--ink);letter-spacing:-.005em}
+.futures .fut-tease{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:14.5px;
+  color:var(--ink-faint);
+  letter-spacing:-.003em;
+  font-weight:300;
+}
+.futures details.fut .acc-body{
+  padding:0 22px 20px;
+  font-size:14.5px;line-height:1.65;
+  color:var(--ink-soft);
+}
+.futures details.fut .acc-body p{margin-bottom:10px}
+.futures details.fut .acc-body p:last-child{margin-bottom:0}
+.futures-note{
+  margin-top:18px;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:15px;
+  color:var(--ink-faint);
+  text-align:center;
+  letter-spacing:-.003em;
+}
+.futures-note em{color:var(--accent-deep);font-style:italic}
+@media(max-width:600px){
+  .futures details.fut summary{font-size:14.5px;padding:14px 18px;padding-right:42px}
+  .futures .fut-tease{font-size:13.5px;display:block;width:100%;margin-top:2px}
+}
+
 /* CTA */
 .cta-section{
   background:linear-gradient(135deg,#1F1A1A 0%,#2D2424 100%);
@@ -1472,6 +1547,67 @@ footer .small{
       </div>
     </div>
   </div>
+</section>
+
+<!-- HOSSZÚ TÁV — collapsed possibilities -->
+<section class="reveal futures-section">
+  <div class="section-num">06 — Ami később lehet</div>
+  <h2 class="section-title">Ha a kapcsolatunk megáll — <em>ezekre is gondoltam.</em></h2>
+  <p class="section-sub">Nem most, nem ígéret — csak hogy lássa, hová tudunk együtt eljutni, ha az első három eszköz beválik. Nyissa meg, ami érdekli.</p>
+
+  <div class="futures">
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">📅</span> <span class="fut-label">Naptár-szinkron</span> <span class="fut-tease">— iPhone-naptárában is jelez</span></summary>
+      <div class="acc-body">
+        <p>Egyszer feliratkozik egy linkre a naptárában — onnantól minden visszahívás, amit hangüzenettel rögzít, automatikusan ott van. Az iPhone és az Apple Watch jelez. Sirivel megkérdezheti: „mi a mai teendőm?"</p>
+        <p>A megszokott naptárában marad — nincs új app.</p>
+      </div>
+    </details>
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">🗂</span> <span class="fut-label">A QlickCRM-mel együtt</span> <span class="fut-tease">— minden adat egy helyen</span></summary>
+      <div class="acc-body">
+        <p>Amit hangüzenettel rögzít, automatikusan bekerül a <strong>QlickCRM-be</strong> is — a megfelelő mezőkbe, az Ön tagjeivel. Ha a csapat módosít valamit, az visszajut Önhöz.</p>
+        <p>A QlickCRM marad a csapat közös tárhelye, az asszisztens pedig az Ön gyors kapuja hozzá. <strong>Nem cseréljük le a meglévőt</strong> — felé tesszük.</p>
+      </div>
+    </details>
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">✉️</span> <span class="fut-label">Email-asszisztens kifelé is</span> <span class="fut-tease">— ügyfélnek is küldhet egy paranccsal</span></summary>
+      <div class="acc-body">
+        <p>Ha azt mondja a botnak: „küldj a Kovács Istvánnak ügyfél-átvilágítási űrlapot" — a rendszer az Ön nevében elküldi az email-t. Az ügyfél a saját telefonján kitölti, az adatok visszaérkeznek.</p>
+        <p>A teljes ügyfél-onboarding papírmunka eltűnik. Az Ön nyugodt-stílusú, magázós szövegeivel.</p>
+      </div>
+    </details>
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">🔍</span> <span class="fut-label">Az archívuma kereshetővé válik</span> <span class="fut-tease">— a meglévő dokumentumai egy kattintásnyira</span></summary>
+      <div class="acc-body">
+        <p>A gépén tárolt tulajdoni lapok, szerződések, térképek — egy név vagy cím beírásával előjönnek a vonatkozó dokumentumok. Nem kell már keresni a Drive-ban vagy a mappákban.</p>
+        <p>Az adatok az Ön gépén / Drive-ján maradnak — csak indexeljük, nem visszük el.</p>
+      </div>
+    </details>
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">🎨</span> <span class="fut-label">Lakberendezési vázlat</span> <span class="fut-tease">— a díjmentes terv elkészítéséhez</span></summary>
+      <div class="acc-body">
+        <p>Ha úgy hirdet egy ingatlant, hogy „díjmentes lakberendezési terv ráadásul" — a leendő vevő 1-2 inputjából egy vizuális induló-moodboard készül, amit átadhat. Az Ön szakmai döntéseit nem cseréli — csak a kreatív kiindulópontot adja, hogy ne fehér papírral kezdjen.</p>
+        <p>Csak akkor lép működésbe, ha Ön kéri — egy ügyfélre szabva.</p>
+      </div>
+    </details>
+
+    <details class="acc fut">
+      <summary><span class="fut-ico">🛠</span> <span class="fut-label">Saját Bernadett-rendszer</span> <span class="fut-tease">— ha többet szeretne, mint amit egy generikus CRM ad</span></summary>
+      <div class="acc-body">
+        <p>Ha egy év múlva azt mondja, hogy szüksége van egy saját nézetre — saját mezőkkel, saját workflow-szakaszokkal, mobil-első dashboarddal — akkor erre is van út.</p>
+        <p>Nem most. Nem első körben. <strong>Csak ha tényleg úgy érzi</strong>, hogy a meglévő rendszerek többet nem adnak. Amíg ide nem érünk, ne is gondoljon rá — az első három eszköz a 80%-át megoldja.</p>
+      </div>
+    </details>
+
+  </div>
+
+  <p class="futures-note">Az árakról és időkről akkor beszélünk, amikor egy-egy lépés ténylegesen aktuális lesz. Most a fő dolog: <em>az első három eszköz.</em></p>
 </section>
 
 </div><!-- /container -->
