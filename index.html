@@ -770,14 +770,105 @@ section+section{border-top:1px solid var(--line)}
   display:flex;align-items:center;gap:8px;
 }
 .sp-bar::before{content:"●";color:var(--green);font-size:8px}
-.sp-body{padding:18px 22px;font-size:14px;line-height:1.65}
-.sp-body .h{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:6px}
-.sp-body .meta{font-size:12px;color:var(--ink-faint);font-family:var(--mono);margin-bottom:14px}
-.sp-body table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
-.sp-body td{padding:5px 0;border-bottom:1px dashed var(--line)}
-.sp-body td:first-child{color:var(--ink-faint);width:40%;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
-.sp-body .filled{background:var(--green-soft);padding:1px 6px;border-radius:3px;color:#3A5836}
-.sp-body .empty{background:var(--accent-soft);padding:1px 6px;border-radius:3px;color:var(--accent-deep);font-style:italic}
+.sp-body{padding:24px 26px 22px;font-size:14px;line-height:1.65;background:#FFFCF7;font-family:'Times New Roman',Georgia,serif}
+
+/* Word-doc fejléc */
+.sp-body .doc-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:16px;
+  padding-bottom:14px;
+  margin-bottom:18px;
+  border-bottom:2px double var(--line-strong);
+}
+.sp-body .doc-title{
+  font-size:16px;font-weight:700;
+  letter-spacing:.04em;
+  color:var(--ink);
+  text-transform:uppercase;
+  font-family:'Times New Roman',Georgia,serif;
+  margin-bottom:3px;
+  line-height:1.2;
+}
+.sp-body .doc-subtitle{
+  font-size:12px;font-style:italic;
+  color:var(--ink-soft);
+  font-family:'Times New Roman',Georgia,serif;
+}
+.sp-body .doc-id{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink-soft);
+  text-align:right;
+  line-height:1.55;
+  flex-shrink:0;
+}
+.sp-body .doc-id-row span{color:var(--ink-faint)}
+.sp-body .doc-id-row strong{color:var(--ink);font-weight:500}
+
+/* Szekció */
+.sp-body .doc-section{margin:0 0 16px}
+.sp-body .doc-h{
+  font-family:'Times New Roman',Georgia,serif;
+  font-size:13px;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:6px;
+  letter-spacing:.02em;
+  padding-bottom:3px;
+  border-bottom:1px solid var(--line);
+}
+
+/* Tábla — Word-szerűbb, nem dashed-es */
+.sp-body table{width:100%;border-collapse:collapse;font-size:12.5px;margin:0;font-family:'Times New Roman',Georgia,serif}
+.sp-body td{padding:5px 0;border-bottom:1px dotted rgba(31,26,26,.08);vertical-align:top;line-height:1.5}
+.sp-body td:first-child{color:var(--ink-soft);width:42%;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:none;font-weight:500;padding-right:10px}
+.sp-body .filled{background:var(--green-soft);padding:1px 6px;border-radius:2px;color:#3A5836;font-family:'Times New Roman',Georgia,serif}
+.sp-body .empty{background:var(--accent-soft);padding:1px 6px;border-radius:2px;color:var(--accent-deep);font-style:italic;font-family:'Times New Roman',Georgia,serif}
+
+/* Doc footer */
+.sp-body .doc-footer{
+  margin-top:18px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  font-family:'Times New Roman',Georgia,serif;
+}
+.sp-body .doc-sig{
+  font-size:11.5px;
+  font-style:italic;
+  color:var(--ink-soft);
+}
+.sp-body .doc-sig strong{color:var(--ink);font-weight:600;font-style:normal}
+.sp-body .doc-page{
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-faint);
+  letter-spacing:.1em;
+}
+
+/* Legend a vázlat alatt */
+.sp-body .legend{
+  font-size:11.5px;
+  color:var(--ink-faint);
+  margin-top:18px;
+  font-family:var(--mono);
+  letter-spacing:.02em;
+  line-height:1.6;
+  padding:10px 12px;
+  background:var(--bg);
+  border-radius:6px;
+}
+
+/* Mobil */
+@media(max-width:600px){
+  .sp-body{padding:18px 16px}
+  .sp-body .doc-header{flex-direction:column;gap:8px}
+  .sp-body .doc-id{text-align:left}
+  .sp-body .doc-title{font-size:14px}
+  .sp-body table{font-size:12px}
+  .sp-body td:first-child{width:38%;font-size:10px}
+}
 
 /* ACCORDION (details) */
 details.acc{
@@ -1432,22 +1523,98 @@ footer .small{
           <button class="tab-btn" data-sp-filter="manual">Mit írsz Te</button>
         </div>
         <div class="sample-preview" id="spDoc">
-          <div class="sp-bar">ELŐNÉZET — 60-70%-ban előtöltött vázlat</div>
+          <div class="sp-bar">ELŐNÉZET — 60-70%-ban előtöltött Word-vázlat · 1/4. oldal</div>
           <div class="sp-body">
-            <div class="h">Értékbecslési Jelentés</div>
-            <div class="meta">Görbe utca 4/B · HRSZ 2347/3 · 2026.05.10.</div>
-            <table>
-              <tr data-kind="auto"><td>HRSZ</td><td><span class="filled">2347/3 (kivonat)</span></td></tr>
-              <tr data-kind="auto"><td>Méret (m²)</td><td><span class="filled">165 m² hasznos + 80 pince</span></td></tr>
-              <tr data-kind="auto"><td>Terhek</td><td><span class="filled">ELMŰ vezetékjog 23m²</span></td></tr>
-              <tr data-kind="auto"><td>Tulajdonosok</td><td><span class="filled">5 fő, osztatlan közös</span></td></tr>
-              <tr data-kind="auto"><td>Comparable-ek (Sasad, 2026)</td><td><span class="filled">3 hirdetés ingatlan.com-ról</span></td></tr>
-              <tr data-kind="auto"><td>Piaci kontextus</td><td><span class="filled">XI. ker. 1.289 E Ft/m² átlag</span></td></tr>
-              <tr data-kind="manual"><td>Becsült érték</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
-              <tr data-kind="manual"><td>Állapot-faktor</td><td><span class="empty">Bernadett szakmai döntése</span></td></tr>
-              <tr data-kind="manual"><td>Stratégiai érvelés</td><td><span class="empty">Bernadett írja meg</span></td></tr>
-            </table>
-            <p style="font-size:12.5px;color:var(--ink-faint);margin-top:14px;font-family:var(--mono);letter-spacing:.04em">A <span style="background:var(--green-soft);color:#3A5836;padding:1px 5px;border-radius:3px">zöld</span> sorok automatikusan jönnek. A <span style="background:var(--accent-soft);color:var(--accent-deep);padding:1px 5px;border-radius:3px">rózsaszín</span> a Te szakmai részed.</p>
+
+            <!-- Document header (Word-szerű) -->
+            <div class="doc-header">
+              <div class="doc-title-block">
+                <div class="doc-title">INGATLAN ÉRTÉKBECSLÉSI JELENTÉS</div>
+                <div class="doc-subtitle">Lakóingatlan piaci értékének megállapítása</div>
+              </div>
+              <div class="doc-id">
+                <div class="doc-id-row"><span>Iktatószám:</span> <strong>RB-2026/0512</strong></div>
+                <div class="doc-id-row"><span>Készítés dátuma:</span> <strong>2026.05.10.</strong></div>
+                <div class="doc-id-row"><span>Megbízó:</span> <strong>Pintér L. és Pintér Zs.</strong></div>
+              </div>
+            </div>
+
+            <!-- 1. Az ingatlan azonosítása -->
+            <div class="doc-section">
+              <div class="doc-h">1. Az ingatlan azonosítása</div>
+              <table>
+                <tr data-kind="auto"><td>Cím</td><td><span class="filled">Budapest XI. ker., Görbe utca 4/B</span></td></tr>
+                <tr data-kind="auto"><td>Helyrajzi szám</td><td><span class="filled">2347/3 — kivett lakóház, udvar</span></td></tr>
+                <tr data-kind="auto"><td>Telek mérete</td><td><span class="filled">870 m² (közös, 4/A + 4/B)</span></td></tr>
+                <tr data-kind="auto"><td>Hasznos alapterület</td><td><span class="filled">~165 m² (földszint + emelet + tető)</span></td></tr>
+                <tr data-kind="auto"><td>Pince / garázs</td><td><span class="filled">~80 m² (1999-es átalakítás után)</span></td></tr>
+                <tr data-kind="auto"><td>Építés / átalakítás</td><td><span class="filled">1999. évi átalakítási engedély</span></td></tr>
+              </table>
+            </div>
+
+            <!-- 2. Tulajdoni viszonyok -->
+            <div class="doc-section">
+              <div class="doc-h">2. Tulajdoni viszonyok</div>
+              <table>
+                <tr data-kind="auto"><td>Tulajdoni forma</td><td><span class="filled">Osztatlan közös tulajdon</span></td></tr>
+                <tr data-kind="auto"><td>Tulajdonosok</td><td><span class="filled">5 fő (Pintér 50%, Fórján 50%)</span></td></tr>
+                <tr data-kind="auto"><td>Pintér László</td><td><span class="filled">25% (4/B természetbeni hasz.)</span></td></tr>
+                <tr data-kind="auto"><td>Pintér Zsolt</td><td><span class="filled">25% (4/B természetbeni hasz.)</span></td></tr>
+                <tr data-kind="auto"><td>Fórján Magdolna</td><td><span class="filled">25% (4/A) + haszonélvezeti jog</span></td></tr>
+                <tr data-kind="auto"><td>Terhelések</td><td><span class="filled">ELMŰ vezetékjog 23 m²</span></td></tr>
+              </table>
+            </div>
+
+            <!-- 3. Műszaki állapot — Bernadett írja -->
+            <div class="doc-section">
+              <div class="doc-h">3. Műszaki állapot</div>
+              <table>
+                <tr data-kind="manual"><td>Általános benyomás</td><td><span class="empty">[ Itt írja le a helyszíni szemle alapján a benyomást — falak, nyílászárók, fűtés, nedvesedés, általános karbantartottság ]</span></td></tr>
+                <tr data-kind="manual"><td>Korszerűsítések</td><td><span class="empty">[ Volt-e azóta felújítás? Mit cserélt utoljára a tulajdonos? Energia-besorolás? ]</span></td></tr>
+                <tr data-kind="manual"><td>Állapot-faktor</td><td><span class="empty">[ Az Ön szakmai döntése — pl. „karbantartott, 25 éves, részleges korszerűsítés szükséges" ]</span></td></tr>
+              </table>
+            </div>
+
+            <!-- 4. Piaci helyzet -->
+            <div class="doc-section">
+              <div class="doc-h">4. Piaci helyzet, összehasonlító adatok</div>
+              <table>
+                <tr data-kind="auto"><td>XI. ker. átlag (2026 Q2)</td><td><span class="filled">1.289 E Ft/m² (Költözzbe.hu)</span></td></tr>
+                <tr data-kind="auto"><td>Sasad-Sashegy átlag</td><td><span class="filled">1.860–2.310 E Ft/m² (Ingatlannet)</span></td></tr>
+                <tr data-kind="auto"><td>Comp 1 — Sasad ikerház</td><td><span class="filled">226,9 M Ft, 178 m² (ingatlan.com)</span></td></tr>
+                <tr data-kind="auto"><td>Comp 2 — Eper utca</td><td><span class="filled">98 M Ft, 92 m² (ingatlantájoló)</span></td></tr>
+                <tr data-kind="auto"><td>Comp 3 — közeli utca</td><td><span class="filled">175 M Ft, 142 m² (Ingatlanbazár)</span></td></tr>
+                <tr data-kind="manual"><td>Komparabilitás megjegyzés</td><td><span class="empty">[ Mennyiben hasonlítanak/különböznek? Milyen korrekciók? ]</span></td></tr>
+              </table>
+            </div>
+
+            <!-- 5. Értékelési módszerek -->
+            <div class="doc-section">
+              <div class="doc-h">5. Értékelési módszer és számítás</div>
+              <table>
+                <tr data-kind="manual"><td>Választott módszer</td><td><span class="empty">[ Piaci összehasonlító / hozam / költségalapú — az Ön döntése ]</span></td></tr>
+                <tr data-kind="manual"><td>m² alapérték (becslés)</td><td><span class="empty">[ pl. 1.450 E Ft/m² — a comp-okból derivált, faktorral korrigált ]</span></td></tr>
+                <tr data-kind="manual"><td>50% tulajdoni hányad korrekció</td><td><span class="empty">[ Diszkont az osztatlan közös miatt — szakmai becslés ]</span></td></tr>
+                <tr data-kind="manual"><td>Társasházzá-alakítási prémium</td><td><span class="empty">[ Mennyivel ér többet, ha külön albetét lesz? ]</span></td></tr>
+              </table>
+            </div>
+
+            <!-- 6. Következtetés -->
+            <div class="doc-section">
+              <div class="doc-h">6. Megállapított piaci érték</div>
+              <table>
+                <tr data-kind="manual"><td><strong>Becsült piaci érték</strong></td><td><span class="empty"><strong>[ Az Ön végeredménye — pl. 195 M Ft jelenlegi állapotban, 245 M Ft TH-alakítás után ]</strong></span></td></tr>
+                <tr data-kind="manual"><td>Indoklás</td><td><span class="empty">[ Az Ön szakmai érvelése — itt írja meg a 2-3 bekezdést ]</span></td></tr>
+              </table>
+            </div>
+
+            <!-- Footer -->
+            <div class="doc-footer">
+              <div class="doc-sig">Készítette: <strong>Ropoli Bernadett</strong> · MAISZ-tag, energetikai tanúsító</div>
+              <div class="doc-page">— 1/4 oldal —</div>
+            </div>
+
+            <p class="legend">A <span style="background:var(--green-soft);color:#3A5836;padding:1px 5px;border-radius:3px">zöld</span> sorokat a rendszer tölti előre — tulajdoni lap, ingatlan.com, statisztikák. A <span style="background:var(--accent-soft);color:var(--accent-deep);padding:1px 5px;border-radius:3px">rózsaszín</span> a szakmai része — az adja az értéket.</p>
           </div>
         </div>
       </div>
